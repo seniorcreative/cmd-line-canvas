@@ -36,3 +36,9 @@ export function cmdIsValid(cmd: string) {
         cmdFirstLetterIsValid(cmd) &&
         cmdHasCorrectNumArgs(cmd) === instructions[cmd.split(" ")[0]]
 }
+
+export function dumpOutput(output: any) {
+    for (let line in output) {
+        console.log(output[line].join(''));
+    }
+}

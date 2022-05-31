@@ -1,4 +1,4 @@
-import { cmdIsValid } from '../common/utils';
+import { cmdIsValid, dumpOutput } from '../common/utils';
 import { canvasMethod } from './drawingController';
 
 export function handleCommand(cmd: string) {
@@ -17,12 +17,13 @@ export function handleCommand(cmd: string) {
 
                 drawingMethod = canvasMethod;
                 let output = drawingMethod(Number(commandOperands[0]), Number(commandOperands[1]));
-                console.log(output);
+                dumpOutput(output);
 
                 break;
             default:
                 break;
         }
+
 
     } else {
         console.log("Command is not valid. Check the instructions in the README.");
