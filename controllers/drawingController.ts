@@ -1,5 +1,15 @@
 export function canvasMethod(width: number, height: number) {
-    let row = new Array(width).fill(0);
-    let matrix = new Array(height).fill(JSON.parse(JSON.stringify(row)));
+    let fullRow = new Array(width).fill('X');
+    //
+    let borderRow = [];
+    for (let col: number = 0; col < width; col++) {
+        borderRow.push(col === 0 || col === width - 1 ? 'X' : ' ');
+    }
+    // TODO: Make sure there is a test for w Min 3 and h min 3 - don't allow to have a canvas smaller [EDGE]
+    let midRows = [];
+    for (let row: number = 0; row < height - 2; row++) {
+        midRows.push(JSON.parse(JSON.stringify(borderRow)));
+    }
+    let matrix = [fullRow].concat(midRows).concat([fullRow]);
     return matrix;
 }
