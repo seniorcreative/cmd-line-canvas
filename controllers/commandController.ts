@@ -3,7 +3,7 @@ import { canvasMethod } from './drawingController';
 
 export function handleCommand(cmd: string) {
 
-    const trimmedCommand = cmd.trim();
+    const trimmedCommand = cmd.trim().toUpperCase();
 
     if (cmdIsValid(trimmedCommand)) {
 
