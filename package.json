@@ -4,7 +4,7 @@
   "description": "node and typescript command line project",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "build": "tsc --project tsconfig.build.json",
     "start": "node dist/index.js"
   },

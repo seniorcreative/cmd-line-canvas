@@ -1,4 +1,4 @@
-import { handleCommand } from "./controllers/commandInterface";
+import { handleCommand } from "./controllers/commandController";
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -7,7 +7,7 @@ const readline = require('readline').createInterface({
 
 const q = function () {
     readline.question(`enter command: `, (command: string) => {
-        handleCommand(command.trim());
+        handleCommand(command);
         q();
     })
 };
