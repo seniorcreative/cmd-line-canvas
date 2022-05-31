@@ -43,8 +43,8 @@ export function cmdCanvasParamsCheck(cmd: string) {
 // EDGE: Check for trying to pass decimals
 export function checkWholeNumber(val: any) {
     const num: number = Number(val);
-    if (isNaN(num)) return false;
-    return num % 1 === 0 ? num : false;
+    if (isNaN(num)) return 0;
+    return num % 1 === 0 ? num : 0;
 }
 
 // Composite function
