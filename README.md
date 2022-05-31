@@ -3,6 +3,6 @@ Draw in the terminal with some basic commands
 
 
 ### Edge cases 
-[] Cannot create a canvas with a decimal
-[] Cannot create a canvas with number for width or height less than 3
-[] Cannot create a canvas with non numeric width and height
+* Cannot create a canvas with a decimal
+* Cannot create a canvas with number for width or height less than 3
+* Cannot create a canvas with non numeric width and height
