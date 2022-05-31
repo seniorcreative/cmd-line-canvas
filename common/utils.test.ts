@@ -25,11 +25,13 @@ describe('check valid command input', () => {
         expect(cmdHasCorrectNumArgs(inputD)).toBe(0);
     })
 
-    it('command for canvas has minimum param values for width and height', () => {
+    it('command for canvas has valid param values for width and height', () => {
         const inputA = 'C 3 3';
         const inputB = 'C 2 2';
+        const inputC = 'C 4.5 4.5';
         expect(cmdCanvasParamsCheck(inputA)).toBeTruthy()
         expect(cmdCanvasParamsCheck(inputB)).toBeFalsy();
+        expect(cmdCanvasParamsCheck(inputC)).toBeFalsy();
     })
 
     it('is a valid command', () => {

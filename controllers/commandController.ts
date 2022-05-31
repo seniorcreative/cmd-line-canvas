@@ -1,5 +1,6 @@
 import { cmdIsValid, dumpOutput } from '../common/utils';
 import { canvasMethod } from './drawingController';
+import { CanvasProps } from "../types/drawingTypes";
 
 export function handleCommand(cmd: string) {
 
@@ -16,7 +17,8 @@ export function handleCommand(cmd: string) {
             case "C":
 
                 drawingMethod = canvasMethod;
-                let output = drawingMethod(Number(commandOperands[0]), Number(commandOperands[1]));
+                const canvasProps: CanvasProps = { width: Number(commandOperands[0]), height: Number(commandOperands[1]), backgroundColor: '-' };
+                let output = drawingMethod(canvasProps);
                 dumpOutput(output);
 
                 break;

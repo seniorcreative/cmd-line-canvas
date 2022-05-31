@@ -1,4 +1,5 @@
 
+// Constant
 const instructions: any = { C: 2, L: 4, R: 4, B: 3, Q: 0 }
 
 export function cmdHasMinSpaces(cmd: string, numSpaces: number) {
@@ -31,12 +32,19 @@ export function cmdHasCorrectNumArgs(cmd: string) {
 // A canvas needs to be a minimum of 3 x 3
 export function cmdCanvasParamsCheck(cmd: string) {
     const cmdSplit = cmd.split(" ");
-    const key: string = cmdSplit[0]
+    const key: string = cmdSplit[0];
     if (String(key) === 'C') {
-        return (Number(cmdSplit[1]) >= 3 && Number(cmdSplit[2]) >= 3)
+        return (checkWholeNumber(cmdSplit[1]) >= 3 && checkWholeNumber(cmdSplit[2]) >= 3)
     } else {
         return true;
     }
+}
+
+// EDGE: Check for trying to pass decimals
+export function checkWholeNumber(val: any) {
+    const num: number = Number(val);
+    if (isNaN(num)) return false;
+    return num % 1 === 0 ? num : false;
 }
 
 // Composite function
