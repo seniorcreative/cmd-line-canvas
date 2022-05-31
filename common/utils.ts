@@ -28,12 +28,24 @@ export function cmdHasCorrectNumArgs(cmd: string) {
     }
 }
 
+// A canvas needs to be a minimum of 3 x 3
+export function cmdCanvasParamsCheck(cmd: string) {
+    const cmdSplit = cmd.split(" ");
+    const key: string = cmdSplit[0]
+    if (String(key) === 'C') {
+        return (Number(cmdSplit[1]) >= 3 && Number(cmdSplit[2]) >= 3)
+    } else {
+        return true;
+    }
+}
+
 // Composite function
 export function cmdIsValid(cmd: string) {
     return cmdHasMinSpaces(cmd, 2) &&
         cmdHasMaxSpaces(cmd, 4) &&
         cmdFirstLetterIsAlpha(cmd) &&
         cmdFirstLetterIsValid(cmd) &&
+        cmdCanvasParamsCheck(cmd) &&
         cmdHasCorrectNumArgs(cmd) === instructions[cmd.split(" ")[0]]
 }
 

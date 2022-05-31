@@ -1,4 +1,4 @@
-import { cmdHasMinSpaces, cmdHasMaxSpaces, cmdFirstLetterIsAlpha, cmdFirstLetterIsValid, cmdHasCorrectNumArgs, cmdIsValid } from './utils';
+import { cmdHasMinSpaces, cmdHasMaxSpaces, cmdFirstLetterIsAlpha, cmdFirstLetterIsValid, cmdHasCorrectNumArgs, cmdIsValid, cmdCanvasParamsCheck } from './utils';
 
 describe('check valid command input', () => {
     it('should contain at least (x) spaces', () => {
@@ -41,8 +41,15 @@ describe('check valid command input', () => {
         expect(cmdHasCorrectNumArgs(input)).toBe(0);
     })
 
+    it('command has min param values (for C should be >= 3)', () => {
+        const inputA = 'C 3 3';
+        const inputB = 'C 2 2';
+        expect(cmdCanvasParamsCheck(inputA)).toBeTruthy()
+        expect(cmdCanvasParamsCheck(inputB)).toBeFalsy();
+    })
+
     it('is a valid command', () => {
-        const input = 'C 1 2';
+        const input = 'C 4 4';
         expect(cmdIsValid(input)).toBeTruthy();
     })
 
