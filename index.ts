@@ -1,4 +1,4 @@
-import { cmdHasMinimumSpaces, cmdFirstLetterIsAlpha, cmdFirstLetterIsValid } from './common/utils';
+import { handleCommand } from "./controllers/commandInterface";
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -7,7 +7,7 @@ const readline = require('readline').createInterface({
 
 const q = function () {
     readline.question(`enter command: `, (command: string) => {
-        console.log(`Your command ${command}`);
+        handleCommand(command.trim());
         q();
     })
 };
