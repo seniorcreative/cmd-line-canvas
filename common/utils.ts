@@ -1,10 +1,6 @@
 
 import DrawingModel from "../model/drawingModel";
 
-// Constants
-const instructions: any = { C: 2, L: 4, R: 4, B: 3, Q: 0 }
-
-
 export function cmdHasMinSpaces(cmd: string, numSpaces: number) {
     return (cmd.split(" ").length - 1) >= numSpaces;
 }
@@ -19,14 +15,14 @@ export function cmdFirstLetterIsAlpha(cmd: string) {
 
 export function cmdFirstLetterIsValid(cmd: string) {
     const firstLetter: string = cmdFirstLetter(cmd);
-    return Object(instructions).hasOwnProperty(firstLetter);
+    return Object(DrawingModel.instructions).hasOwnProperty(firstLetter);
 }
 
 export function cmdHasCorrectNumArgs(cmd: string) {
     const cmdSplit = cmd.split(" ");
     const firstLetter: string = cmdFirstLetter(cmd);
-    if (instructions[firstLetter] === cmdSplit.length - 1)
-        return instructions[firstLetter];
+    if (DrawingModel.instructions[firstLetter] === cmdSplit.length - 1)
+        return DrawingModel.instructions[firstLetter];
     else {
         return false;
     }
@@ -68,7 +64,7 @@ export function cmdIsValid(cmd: string) {
         cmdFirstLetterIsValid(cmd) &&
         cmdCanvasParamsCheck(cmd) &&
         canvasAvailableForCommand(cmd) &&
-        cmdHasCorrectNumArgs(cmd) === instructions[cmd.split(" ")[0]]
+        cmdHasCorrectNumArgs(cmd) === DrawingModel.instructions[cmd.split(" ")[0]]
 }
 
 export function dumpOutput(output: any) {
