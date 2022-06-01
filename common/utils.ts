@@ -43,8 +43,8 @@ export function cmdCanvasParamsCheck(cmd: string) {
     }
 }
 
-export function canvasIsAvailable() {
-    return DrawingModel.canvasAvailable
+export function canvasAvailableForCommand(cmd: string) {
+    return cmdFirstLetter(cmd) !== "C" ? DrawingModel.canvasAvailable === true : true
 }
 
 // Check for trying to pass decimals
@@ -67,6 +67,7 @@ export function cmdIsValid(cmd: string) {
         cmdFirstLetterIsAlpha(cmd) &&
         cmdFirstLetterIsValid(cmd) &&
         cmdCanvasParamsCheck(cmd) &&
+        canvasAvailableForCommand(cmd) &&
         cmdHasCorrectNumArgs(cmd) === instructions[cmd.split(" ")[0]]
 }
 

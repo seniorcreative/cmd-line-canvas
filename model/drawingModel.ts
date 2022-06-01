@@ -2,7 +2,7 @@ export default class DrawingModel {
 
     private static _backgroundColor: string = ' ';
     private static _canvasAvailable: boolean = false;
-    private static _drawingMatrix: any[] = [];
+    private static _drawingMatrix: Array<Array<string>> = [];
 
     static set backgroundColor(color: string) {
         DrawingModel._backgroundColor = color;
@@ -27,6 +27,5 @@ export default class DrawingModel {
     static get drawingMatrix() {
         return DrawingModel._drawingMatrix;
     }
-
 
 }
