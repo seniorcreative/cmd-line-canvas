@@ -46,11 +46,12 @@ export function cmdLineParamsCheck(cmd: string) {
     const firstLetter: string = cmdFirstLetter(cmd);
     if (String(firstLetter) === 'L') {
         const hasEitherMatches: boolean = (checkWholeNumber(cmdSplit[1]) === checkWholeNumber(cmdSplit[3]) || checkWholeNumber(cmdSplit[2]) === checkWholeNumber(cmdSplit[4]))
-        const x1WithinBounds: boolean = checkWholeNumber(cmdSplit[1]) > 0 && checkWholeNumber(cmdSplit[1]) < DrawingModel.drawingMatrix.length - 1;
-        const x2WithinBounds: boolean = checkWholeNumber(cmdSplit[3]) > 0 && checkWholeNumber(cmdSplit[3]) < DrawingModel.drawingMatrix.length - 1;
-        const y1WithinBounds: boolean = checkWholeNumber(cmdSplit[2]) > 0 && checkWholeNumber(cmdSplit[2]) < DrawingModel.drawingMatrix[0].length - 1;
-        const y2WithinBounds: boolean = checkWholeNumber(cmdSplit[4]) > 0 && checkWholeNumber(cmdSplit[4]) < DrawingModel.drawingMatrix[0].length - 1;
+        const x1WithinBounds: boolean = checkWholeNumber(cmdSplit[1]) > 0 && checkWholeNumber(cmdSplit[1]) < DrawingModel.drawingMatrix[0].length - 1;
+        const x2WithinBounds: boolean = checkWholeNumber(cmdSplit[3]) > 0 && checkWholeNumber(cmdSplit[3]) < DrawingModel.drawingMatrix[0].length - 1;
+        const y1WithinBounds: boolean = checkWholeNumber(cmdSplit[2]) > 0 && checkWholeNumber(cmdSplit[2]) < DrawingModel.drawingMatrix.length - 1;
+        const y2WithinBounds: boolean = checkWholeNumber(cmdSplit[4]) > 0 && checkWholeNumber(cmdSplit[4]) < DrawingModel.drawingMatrix.length - 1;
         console.log('has either matches', hasEitherMatches);
+        console.log('drawing matrix', DrawingModel.drawingMatrix, DrawingModel.drawingMatrix.length);
         console.log('has x1 within bounds', x1WithinBounds);
         console.log('has x2 within bounds', x2WithinBounds);
         console.log('has y1 within bounds', y1WithinBounds);
@@ -74,7 +75,7 @@ export function checkWholeNumber(val: any) {
 
 export function cmdFirstLetter(cmd: string) {
     const cmdSplit = cmd.split(" ");
-    const firstLetter: string = cmdSplit[0];
+    const firstLetter: string = cmdSplit[0].toUpperCase();
     return firstLetter;
 }
 
@@ -87,7 +88,7 @@ export function cmdIsValid(cmd: string) {
         cmdCanvasParamsCheck(cmd) &&
         cmdLineParamsCheck(cmd) &&
         canvasAvailableForCommand(cmd) &&
-        cmdHasCorrectNumArgs(cmd) === DrawingModel.instructions[cmd.split(" ")[0]]
+        cmdHasCorrectNumArgs(cmd) === DrawingModel.instructions[cmdFirstLetter(cmd)]
 }
 
 export function dumpOutput(output: any) {

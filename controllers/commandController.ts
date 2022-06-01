@@ -1,11 +1,11 @@
 import { cmdIsValid, dumpOutput, checkWholeNumber } from '../common/utils';
-import { canvasMethod, lineMethod } from './drawingController';
-import { CanvasProps, LineProps } from "../types/drawingTypes";
+import { canvasMethod, lineMethod, rectMethod } from './drawingController';
+import { CanvasProps, LineProps, RectProps } from "../types/drawingTypes";
 import DrawingModel from "../model/drawingModel";
 
 export function handleCommand(cmd: string) {
 
-    const trimmedCommand = cmd.trim().toUpperCase();
+    const trimmedCommand = cmd.trim();
 
     if (cmdIsValid(trimmedCommand)) {
 
@@ -14,9 +14,12 @@ export function handleCommand(cmd: string) {
 
         let drawingMethod: Function;
 
+        DrawingModel.stashCommand(trimmedCommand);
+
         switch (primaryCommand) {
 
             case "C":
+            case "c":
 
                 drawingMethod = canvasMethod;
 
@@ -28,11 +31,11 @@ export function handleCommand(cmd: string) {
 
                 DrawingModel.canvasAvailable = true;
                 DrawingModel.drawingMatrix = drawingMethod(canvasProps);
-                dumpOutput(DrawingModel.drawingMatrix);
 
                 break;
 
             case "L":
+            case "l":
 
                 drawingMethod = lineMethod;
 
@@ -45,12 +48,37 @@ export function handleCommand(cmd: string) {
 
                 DrawingModel.drawingMatrix = drawingMethod(lineProps);
 
-                dumpOutput(DrawingModel.drawingMatrix);
+                break;
 
+            case "R":
+            case "r":
+
+                drawingMethod = rectMethod;
+
+                const rectProps: RectProps = {
+                    x1: checkWholeNumber(commandOperands[0]),
+                    y1: checkWholeNumber(commandOperands[1]),
+                    x2: checkWholeNumber(commandOperands[2]),
+                    y2: checkWholeNumber(commandOperands[3]),
+                };
+
+                DrawingModel.drawingMatrix = drawingMethod(rectProps);
+
+                break;
+
+            case "B":
+            case "b":
+
+                console.log("Brush Command", DrawingModel.stashedCommands);
+
+
+                break;
 
             default:
                 break;
         }
+
+        dumpOutput(DrawingModel.drawingMatrix);
 
 
     } else {

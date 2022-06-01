@@ -1,5 +1,5 @@
-import { canvasMethod, lineMethod } from './drawingController';
-import { CanvasProps, LineProps } from "../types/drawingTypes";
+import { canvasMethod, lineMethod, rectMethod } from './drawingController';
+import { CanvasProps, LineProps, RectProps } from "../types/drawingTypes";
 import DrawingModel from "../model/drawingModel";
 
 describe('matrix operations', () => {
@@ -28,6 +28,22 @@ describe('matrix operations', () => {
             ['|', backgroundColor, backgroundColor, backgroundColor, '|'],
             ['|', backgroundColor, 'x', 'x', '|'],
             ['|', backgroundColor, backgroundColor, backgroundColor, '|'],
+            ['-', '-', '-', '-', '-']]);
+    });
+
+    it('outputs the correct rect location ', () => {
+
+        const { backgroundColor } = DrawingModel;
+        const canvasProps: CanvasProps = { width: 5, height: 5, backgroundColor };
+        const rectProps: RectProps = { x1: 1, y1: 1, x2: 3, y2: 3 };
+
+        DrawingModel.drawingMatrix = canvasMethod(canvasProps);
+
+        expect(rectMethod(rectProps)).toEqual([
+            ['-', '-', '-', '-', '-'],
+            ['|', 'x', 'x', 'x', '|'],
+            ['|', 'x', backgroundColor, 'x', '|'],
+            ['|', 'x', 'x', 'x', '|'],
             ['-', '-', '-', '-', '-']]);
     });
 
