@@ -1,6 +1,7 @@
+import DrawingModel from '../model/drawingModel';
 import { cmdHasMinSpaces, cmdHasMaxSpaces, cmdFirstLetterIsAlpha, cmdFirstLetterIsValid, cmdHasCorrectNumArgs, cmdIsValid, cmdCanvasParamsCheck } from './utils';
 
-describe('check valid command input', () => {
+describe('check valid command sequences', () => {
     it('should contain the optimum number of spaces', () => {
         const inputA = 'a 1';
         const inputB = 'a 1 1 1 5';
@@ -23,6 +24,12 @@ describe('check valid command input', () => {
         expect(cmdHasCorrectNumArgs(inputB)).toBe(4);
         expect(cmdHasCorrectNumArgs(inputC)).toBe(3);
         expect(cmdHasCorrectNumArgs(inputD)).toBe(0);
+    })
+
+    it('checks if canvas becomes available', () => {
+        expect(DrawingModel.canvasAvailable).toBeFalsy()
+        DrawingModel.canvasAvailable = true;
+        expect(DrawingModel.canvasAvailable).toBeTruthy();
     })
 
     it('command for canvas has valid param values for width and height', () => {
