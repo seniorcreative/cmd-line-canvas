@@ -7,6 +7,7 @@ import {
     cmdHasCorrectNumArgs,
     cmdIsValid,
     cmdCanvasParamsCheck,
+    cmdLineParamsCheck,
     canvasAvailableForCommand
 } from './utils';
 
@@ -57,9 +58,26 @@ describe('check valid command sequences', () => {
         const inputA = 'C 3 3';
         const inputB = 'C 2 2';
         const inputC = 'C 4.5 4.5';
-        expect(cmdCanvasParamsCheck(inputA)).toBeTruthy()
+        expect(cmdCanvasParamsCheck(inputA)).toBeTruthy();
         expect(cmdCanvasParamsCheck(inputB)).toBeFalsy();
         expect(cmdCanvasParamsCheck(inputC)).toBeFalsy();
+    })
+
+    it('command for line has valid param values for x1,y1,x2,y2', () => {
+        DrawingModel.drawingMatrix = [
+            ['-', '-', '-', '-', '-'],
+            ['-', ' ', ' ', ' ', ' '],
+            ['-', ' ', ' ', ' ', ' '],
+            ['-', ' ', ' ', ' ', ' '],
+            ['-', ' ', ' ', ' ', ' '],
+            ['-', '-', '-', '-', '-']];
+
+        const inputA = 'L 2 3 3 3';
+        expect(cmdLineParamsCheck(inputA)).toBeTruthy();
+        const inputB = 'L 3 3 4 4';
+        expect(cmdLineParamsCheck(inputB)).toBeFalsy();
+        const inputC = 'L 1 1 10 10';
+        expect(cmdLineParamsCheck(inputC)).toBeFalsy();
     })
 
     it('is a valid command', () => {

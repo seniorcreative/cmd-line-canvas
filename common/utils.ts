@@ -39,6 +39,28 @@ export function cmdCanvasParamsCheck(cmd: string) {
     }
 }
 
+// A line needs to have either x or y values that are equal
+// A line needs to be drawn within the canvas bounds
+export function cmdLineParamsCheck(cmd: string) {
+    const cmdSplit = cmd.split(" ");
+    const firstLetter: string = cmdFirstLetter(cmd);
+    if (String(firstLetter) === 'L') {
+        const hasEitherMatches: boolean = (checkWholeNumber(cmdSplit[1]) === checkWholeNumber(cmdSplit[3]) || checkWholeNumber(cmdSplit[2]) === checkWholeNumber(cmdSplit[4]))
+        const x1WithinBounds: boolean = checkWholeNumber(cmdSplit[1]) > 0 && checkWholeNumber(cmdSplit[1]) < DrawingModel.drawingMatrix.length - 1;
+        const x2WithinBounds: boolean = checkWholeNumber(cmdSplit[3]) > 0 && checkWholeNumber(cmdSplit[3]) < DrawingModel.drawingMatrix.length - 1;
+        const y1WithinBounds: boolean = checkWholeNumber(cmdSplit[2]) > 0 && checkWholeNumber(cmdSplit[2]) < DrawingModel.drawingMatrix[0].length - 1;
+        const y2WithinBounds: boolean = checkWholeNumber(cmdSplit[4]) > 0 && checkWholeNumber(cmdSplit[4]) < DrawingModel.drawingMatrix[0].length - 1;
+        console.log('has either matches', hasEitherMatches);
+        console.log('has x1 within bounds', x1WithinBounds);
+        console.log('has x2 within bounds', x2WithinBounds);
+        console.log('has y1 within bounds', y1WithinBounds);
+        console.log('has y2 within bounds', y2WithinBounds);
+        return hasEitherMatches && x1WithinBounds && x2WithinBounds && y1WithinBounds && y2WithinBounds;
+    } else {
+        return true;
+    }
+}
+
 export function canvasAvailableForCommand(cmd: string) {
     return cmdFirstLetter(cmd) !== "C" ? DrawingModel.canvasAvailable === true : true
 }
@@ -63,6 +85,7 @@ export function cmdIsValid(cmd: string) {
         cmdFirstLetterIsAlpha(cmd) &&
         cmdFirstLetterIsValid(cmd) &&
         cmdCanvasParamsCheck(cmd) &&
+        cmdLineParamsCheck(cmd) &&
         canvasAvailableForCommand(cmd) &&
         cmdHasCorrectNumArgs(cmd) === DrawingModel.instructions[cmd.split(" ")[0]]
 }

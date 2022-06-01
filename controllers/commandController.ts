@@ -1,6 +1,6 @@
 import { cmdIsValid, dumpOutput, checkWholeNumber } from '../common/utils';
-import { canvasMethod } from './drawingController';
-import { CanvasProps } from "../types/drawingTypes";
+import { canvasMethod, lineMethod } from './drawingController';
+import { CanvasProps, LineProps } from "../types/drawingTypes";
 import DrawingModel from "../model/drawingModel";
 
 export function handleCommand(cmd: string) {
@@ -13,9 +13,9 @@ export function handleCommand(cmd: string) {
         const primaryCommand: string = commandOperands.shift();
 
         let drawingMethod: Function;
-        let drawingMatrix: Array<Array<string>>;
 
         switch (primaryCommand) {
+
             case "C":
 
                 drawingMethod = canvasMethod;
@@ -31,8 +31,21 @@ export function handleCommand(cmd: string) {
                 dumpOutput(DrawingModel.drawingMatrix);
 
                 break;
+
             case "L":
 
+                drawingMethod = lineMethod;
+
+                const lineProps: LineProps = {
+                    x1: checkWholeNumber(commandOperands[0]),
+                    y1: checkWholeNumber(commandOperands[1]),
+                    x2: checkWholeNumber(commandOperands[2]),
+                    y2: checkWholeNumber(commandOperands[3]),
+                };
+
+                DrawingModel.drawingMatrix = drawingMethod(lineProps);
+
+                dumpOutput(DrawingModel.drawingMatrix);
 
 
             default:
