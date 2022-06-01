@@ -47,6 +47,7 @@ export function lineMethod(lineProps: LineProps) {
         }
     } else {
         // Line not allowed
+
     }
 
     return matrix;
