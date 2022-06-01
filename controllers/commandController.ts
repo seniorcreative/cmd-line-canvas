@@ -13,6 +13,7 @@ export function handleCommand(cmd: string) {
         const primaryCommand: string = commandOperands.shift();
 
         let drawingMethod: Function;
+        let drawingMatrix: Array<Array<string>>;
 
         switch (primaryCommand) {
             case "C":
@@ -25,10 +26,15 @@ export function handleCommand(cmd: string) {
                     backgroundColor: DrawingModel.backgroundColor
                 };
 
-                let output = drawingMethod(canvasProps);
-                dumpOutput(output);
+                DrawingModel.canvasAvailable = true;
+                DrawingModel.drawingMatrix = drawingMethod(canvasProps);
+                dumpOutput(DrawingModel.drawingMatrix);
 
                 break;
+            case "L":
+
+
+
             default:
                 break;
         }
