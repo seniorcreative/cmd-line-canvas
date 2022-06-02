@@ -8,6 +8,7 @@ import {
     cmdIsValid,
     cmdCanvasParamsCheck,
     cmdLineParamsCheck,
+    cmdBoundsCheck,
     canvasAvailableForCommand
 } from './utils';
 
@@ -63,13 +64,13 @@ describe('check valid command sequences', () => {
         expect(cmdCanvasParamsCheck(inputC)).toBeFalsy();
     })
 
-    it('command for line has valid param values for x1,y1,x2,y2', () => {
+    it('command for line has valid param values for x1,y1,x2,y2 meaning it will be horizontal or vertical', () => {
         DrawingModel.drawingMatrix = [
             ['-', '-', '-', '-', '-'],
-            ['-', ' ', ' ', ' ', ' '],
-            ['-', ' ', ' ', ' ', ' '],
-            ['-', ' ', ' ', ' ', ' '],
-            ['-', ' ', ' ', ' ', ' '],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
             ['-', '-', '-', '-', '-']];
 
         const inputA = 'L 2 3 3 3';
@@ -78,6 +79,23 @@ describe('check valid command sequences', () => {
         expect(cmdLineParamsCheck(inputB)).toBeFalsy();
         const inputC = 'L 1 1 10 10';
         expect(cmdLineParamsCheck(inputC)).toBeFalsy();
+    })
+
+    it('commands for drawings have param values within bounds ', () => {
+        DrawingModel.drawingMatrix = [
+            ['-', '-', '-', '-', '-'],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
+            ['-', '-', '-', '-', '-']];
+
+        const inputA = 'L 2 3 3 3';
+        expect(cmdBoundsCheck(inputA)).toBeTruthy();
+        const inputB = 'R 3 3 9 9';
+        expect(cmdBoundsCheck(inputB)).toBeFalsy();
+        const inputC = 'B 20 6 o';
+        expect(cmdBoundsCheck(inputC)).toBeFalsy();
     })
 
     it('is a valid command', () => {
