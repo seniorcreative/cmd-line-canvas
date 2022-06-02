@@ -50,12 +50,6 @@ export function cmdLineParamsCheck(cmd: string) {
         const x2WithinBounds: boolean = checkWholeNumber(cmdSplit[3]) > 0 && checkWholeNumber(cmdSplit[3]) < DrawingModel.drawingMatrix[0].length - 1;
         const y1WithinBounds: boolean = checkWholeNumber(cmdSplit[2]) > 0 && checkWholeNumber(cmdSplit[2]) < DrawingModel.drawingMatrix.length - 1;
         const y2WithinBounds: boolean = checkWholeNumber(cmdSplit[4]) > 0 && checkWholeNumber(cmdSplit[4]) < DrawingModel.drawingMatrix.length - 1;
-        console.log('has either matches', hasEitherMatches);
-        console.log('drawing matrix', DrawingModel.drawingMatrix, DrawingModel.drawingMatrix.length);
-        console.log('has x1 within bounds', x1WithinBounds);
-        console.log('has x2 within bounds', x2WithinBounds);
-        console.log('has y1 within bounds', y1WithinBounds);
-        console.log('has y2 within bounds', y2WithinBounds);
         return hasEitherMatches && x1WithinBounds && x2WithinBounds && y1WithinBounds && y2WithinBounds;
     } else {
         return true;

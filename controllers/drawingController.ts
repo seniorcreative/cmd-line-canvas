@@ -43,29 +43,44 @@ export function lineMethod(lineProps: LineProps) {
 
 export function rectMethod(rectProps: RectProps) {
 
-    const { x1, y1, x2, y2 } = rectProps;
+    const { x1, y1, x2, y2, backgroundColor } = rectProps;
 
     let matrix = DrawingModel.drawingMatrix;
 
-    // Top side
+    // Top row
     let rowLineTop = matrix[y1];
     for (let col = x1; col <= x2; col++) {
         rowLineTop[col] = 'x';
     }
-    // Left side
-    for (let row = y1; row <= y2; row++) {
-        matrix[row][x1] = 'x';
+
+    // Mid rows
+    if ((y1 + 1) < y2) {
+        for (let row = y1 + 1; row < y2; row++) {
+            let rowLine = matrix[row];
+            for (let col = x1; col <= x2; col++) {
+                if (col === x1 || col === x2) {
+                    rowLine[col] = 'x';
+                } else {
+                    rowLine[col] = backgroundColor ? backgroundColor : ' ';
+                }
+            }
+        }
     }
 
-    // Bottom side
+    // Left side
+    // for (let row = y1; row <= y2; row++) {
+    //     matrix[row][x1] = 'x';
+    // }
+
+    // Bottom row
     let rowLineBottom = matrix[y2];
     for (let col = x1; col <= x2; col++) {
         rowLineBottom[col] = 'x';
     }
     // Right side
-    for (let row = y1; row <= y2; row++) {
-        matrix[row][x2] = 'x';
-    }
+    // for (let row = y1; row <= y2; row++) {
+    //     matrix[row][x2] = 'x';
+    // }
 
     return matrix;
 

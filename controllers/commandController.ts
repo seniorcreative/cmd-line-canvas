@@ -60,6 +60,7 @@ export function handleCommand(cmd: string) {
                     y1: checkWholeNumber(commandOperands[1]),
                     x2: checkWholeNumber(commandOperands[2]),
                     y2: checkWholeNumber(commandOperands[3]),
+                    backgroundColor: 'o'
                 };
 
                 DrawingModel.drawingMatrix = drawingMethod(rectProps);
