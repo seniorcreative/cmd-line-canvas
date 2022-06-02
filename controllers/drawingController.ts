@@ -1,4 +1,4 @@
-import { CanvasProps, LineProps, RectProps } from "../types/drawingTypes";
+import { BrushProps, CanvasProps, LineProps, RectProps } from "../types/drawingTypes";
 import DrawingModel from "../model/drawingModel";
 
 export function canvasMethod(canvasProps: CanvasProps) {
@@ -53,7 +53,7 @@ export function rectMethod(rectProps: RectProps) {
         rowLineTop[col] = 'x';
     }
 
-    // Mid rows
+    // Mid rows (with fill if brushed inside)
     if ((y1 + 1) < y2) {
         for (let row = y1 + 1; row < y2; row++) {
             let rowLine = matrix[row];
@@ -67,21 +67,31 @@ export function rectMethod(rectProps: RectProps) {
         }
     }
 
-    // Left side
-    // for (let row = y1; row <= y2; row++) {
-    //     matrix[row][x1] = 'x';
-    // }
-
     // Bottom row
     let rowLineBottom = matrix[y2];
     for (let col = x1; col <= x2; col++) {
         rowLineBottom[col] = 'x';
     }
-    // Right side
-    // for (let row = y1; row <= y2; row++) {
-    //     matrix[row][x2] = 'x';
-    // }
 
     return matrix;
+
+}
+
+export function brushMethod(brushProps: BrushProps) {
+
+    const { x, y, brushColor } = brushProps;
+
+    // Brush coords need to be:
+    // - within canvas bounds
+    // - not on a line (or anything that is an 'x' char)
+    // - inside a rect || outside a rect
+
+    // Brush logic functions need to:
+    // - paint canvas layer first 
+    // - set a background color on canvas if brushed outside of a box
+    // - fill canvas with background color 
+    // - draw lines on top of the canvas
+    // - draw rects on top of the canvas
+    // - fill rects with fill color
 
 }

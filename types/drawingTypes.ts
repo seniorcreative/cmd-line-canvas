@@ -18,3 +18,9 @@ export interface RectProps {
     y2: number,
     backgroundColor?: string
 }
+
+export interface BrushProps {
+    x: number,
+    y: number,
+    brushColor: string
+}
