@@ -78,9 +78,9 @@ export class CommandParser {
             x: NumberUtils.parseIntOrThrow(params[0], 'x is not an integer.'),
             y: NumberUtils.parseIntOrThrow(params[1], 'y is not an integer.'),
         };
-        const backgroundColor = params[2];
+        const color = params[2];
 
-        return { command: 'FILL_AREA', point, backgroundColor };
+        return { command: 'FILL_AREA', point, color };
     }
 
 }

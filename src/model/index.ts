@@ -19,10 +19,10 @@ export interface DrawRectangleCommandDescriptor {
     readonly from: Point
 }
 
-export interface BrushCommandDescriptor {
+export interface FillAreaCommandDescriptor {
     readonly command: 'FILL_AREA',
     readonly point: Point,
-    readonly backgroundColor?: string
+    readonly color: string
 }
 
-export type CommandDescriptor = CreateCanvasCommandDescriptor | DrawLineCommandDescriptor | DrawRectangleCommandDescriptor | BrushCommandDescriptor;
+export type CommandDescriptor = CreateCanvasCommandDescriptor | DrawLineCommandDescriptor | DrawRectangleCommandDescriptor | FillAreaCommandDescriptor;

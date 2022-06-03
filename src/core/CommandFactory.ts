@@ -3,6 +3,8 @@ import { Command } from "../types/commandTypes";
 import { CreateCanvasCommand } from "../controllers/CreateCanvasCommand";
 import { CanvasProvider } from "../model/CanvasProvider";
 import { LineCommand } from "../controllers/LineCommand";
+import { RectangleCommand } from "../controllers/RectangleCommand";
+import { FillAreaCommand } from "../controllers/FillAreaCommand";
 
 export class CommandFactory {
 
@@ -17,15 +19,15 @@ export class CommandFactory {
             case "DRAW_LINE":
                 command = new LineCommand(input.from, input.to, CanvasProvider.getInstance());
                 break;
+            case "DRAW_RECTANGLE":
+                command = new RectangleCommand(input.from, input.to, CanvasProvider.getInstance());
+                break;
+            case "FILL_AREA":
+                command = new FillAreaCommand(input.point, input.color, CanvasProvider.getInstance());
+                break;
             default:
                 throw new Error('no command found');
 
-            // case "DRAW_RECTANGLE":
-
-            //     break;
-            // case "FILL_AREA":
-
-            //     break;
         }
 
         return command;

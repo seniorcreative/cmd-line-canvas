@@ -31,7 +31,6 @@ export abstract class Canvas {
 
     drawLine(from: Point, to: Point,): void {
 
-
         if (from.y === to.y) {  // Horizontal line
             let rowLine = this._matrix[from.y];
             for (let col = from.x; col <= to.x; col++) {
@@ -47,11 +46,49 @@ export abstract class Canvas {
 
     }
 
-    drawRectangle(from: Point, to: Point, color: string): void {
-        return;
+    drawRectangle(from: Point, to: Point): void {
+        // Top row
+        let rowLineTop = this._matrix[from.y];
+        for (let col = from.x; col <= to.x; col++) {
+            rowLineTop[col] = 'x';
+        }
+
+        // Mid rows (with fill if brushed inside)
+        if ((from.y + 1) < to.y) {
+            for (let row = from.y + 1; row < to.y; row++) {
+                let rowLine = this._matrix[row];
+                for (let col = from.x; col <= to.x; col++) {
+                    if (col === from.x || col === to.x) {
+                        rowLine[col] = 'x';
+                    } else {
+                        rowLine[col] = ' ';
+                    }
+                }
+            }
+        }
+
+        // Bottom row
+        let rowLineBottom = this._matrix[to.y];
+        for (let col = from.x; col <= to.x; col++) {
+            rowLineBottom[col] = 'x';
+        }
     }
 
     fillArea(point: Point, color: string): void {
+
+        //     // Brush coords need to be:
+        //     // - within canvas bounds
+        //     // - not on a line (or anything that is an 'x' char)
+        //     // - inside a rect || outside a rect
+
+        //     // Brush logic functions need to:
+        //     // - paint canvas layer first 
+        //     // - set a background color on canvas if brushed outside of a box
+        //     // - fill canvas with background color 
+        //     // - draw lines on top of the canvas
+        //     // - draw rects on top of the canvas
+        //     // - fill rects with fill color
+
         return;
     }
 
