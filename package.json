@@ -1,8 +1,8 @@
 {
-  "name": "cs",
+  "name": "command-line-drawing",
   "version": "1.0.0",
-  "description": "node and typescript command line project",
-  "main": "index.ts",
+  "description": "This is a node and typescript command line project",
+  "main": "src/index.ts",
   "scripts": {
     "test": "jest --verbose",
     "build": "tsc --project tsconfig.build.json",

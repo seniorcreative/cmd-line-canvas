@@ -1,97 +1,79 @@
-import { BrushProps, CanvasProps, LineProps, RectProps } from "../types/drawingTypes";
-import DrawingModel from "../model/drawingModel";
+import { FillArea, Line, Rect } from "../types/drawingTypes";
+import DrawModel from "../model/DrawModel";
 
-export function canvasMethod(canvasProps: CanvasProps) {
 
-    const { width, height, backgroundColor } = canvasProps;
+// export function lineMethod(lineProps: Line) {
 
-    let fullRow = new Array(width).fill('-');
-    let borderRow = [];
-    let midRows = [];
+//     const { from, to } = lineProps;
 
-    for (let col: number = 0; col < width; col++) {
-        borderRow.push(col === 0 || col === width - 1 ? '|' : backgroundColor);
-    }
-    for (let row: number = 0; row < height - 2; row++) {
-        midRows.push(JSON.parse(JSON.stringify(borderRow)));
-    }
-    let matrix = [fullRow].concat(midRows).concat([fullRow]);
+//     let matrix = DrawModel.drawingMatrix;
 
-    return matrix;
-}
+//     if (from.y === to.y) {  // Horizontal line
+//         let rowLine = matrix[from.y];
+//         for (let col = from.x; col <= to.x; col++) {
+//             rowLine[col] = 'x';
+//         }
+//     } else if (from.x === to.x) { // Vertical line
+//         for (let row = from.y; row <= to.y; row++) {
+//             matrix[row][from.x] = 'x';
+//         }
+//     }
 
-export function lineMethod(lineProps: LineProps) {
+//     return matrix;
 
-    const { x1, y1, x2, y2 } = lineProps;
+// }
 
-    let matrix = DrawingModel.drawingMatrix;
+// export function rectMethod(rectProps: Rect) {
 
-    if (y1 === y2) {  // Horizontal line
-        let rowLine = matrix[y1];
-        for (let col = x1; col <= x2; col++) {
-            rowLine[col] = 'x';
-        }
-    } else if (x1 === x2) { // Vertical line
-        for (let row = y1; row <= y2; row++) {
-            matrix[row][x1] = 'x';
-        }
-    }
+//     const { from, to, backgroundColor } = rectProps;
 
-    return matrix;
+//     let matrix = DrawModel.drawingMatrix;
 
-}
+//     // Top row
+//     let rowLineTop = matrix[from.y];
+//     for (let col = from.x; col <= to.x; col++) {
+//         rowLineTop[col] = 'x';
+//     }
 
-export function rectMethod(rectProps: RectProps) {
+//     // Mid rows (with fill if brushed inside)
+//     if ((from.y + 1) < to.y) {
+//         for (let row = from.y + 1; row < to.y; row++) {
+//             let rowLine = matrix[row];
+//             for (let col = from.x; col <= to.x; col++) {
+//                 if (col === from.x || col === to.x) {
+//                     rowLine[col] = 'x';
+//                 } else {
+//                     rowLine[col] = backgroundColor ? backgroundColor : ' ';
+//                 }
+//             }
+//         }
+//     }
 
-    const { x1, y1, x2, y2, backgroundColor } = rectProps;
+//     // Bottom row
+//     let rowLineBottom = matrix[to.y];
+//     for (let col = from.x; col <= to.x; col++) {
+//         rowLineBottom[col] = 'x';
+//     }
 
-    let matrix = DrawingModel.drawingMatrix;
+//     return matrix;
 
-    // Top row
-    let rowLineTop = matrix[y1];
-    for (let col = x1; col <= x2; col++) {
-        rowLineTop[col] = 'x';
-    }
+// }
 
-    // Mid rows (with fill if brushed inside)
-    if ((y1 + 1) < y2) {
-        for (let row = y1 + 1; row < y2; row++) {
-            let rowLine = matrix[row];
-            for (let col = x1; col <= x2; col++) {
-                if (col === x1 || col === x2) {
-                    rowLine[col] = 'x';
-                } else {
-                    rowLine[col] = backgroundColor ? backgroundColor : ' ';
-                }
-            }
-        }
-    }
+// export function brushMethod(brushProps: FillArea) {
 
-    // Bottom row
-    let rowLineBottom = matrix[y2];
-    for (let col = x1; col <= x2; col++) {
-        rowLineBottom[col] = 'x';
-    }
+//     const { point, backgroundColor } = brushProps;
 
-    return matrix;
+//     // Brush coords need to be:
+//     // - within canvas bounds
+//     // - not on a line (or anything that is an 'x' char)
+//     // - inside a rect || outside a rect
 
-}
+//     // Brush logic functions need to:
+//     // - paint canvas layer first 
+//     // - set a background color on canvas if brushed outside of a box
+//     // - fill canvas with background color 
+//     // - draw lines on top of the canvas
+//     // - draw rects on top of the canvas
+//     // - fill rects with fill color
 
-export function brushMethod(brushProps: BrushProps) {
-
-    const { x, y, brushColor } = brushProps;
-
-    // Brush coords need to be:
-    // - within canvas bounds
-    // - not on a line (or anything that is an 'x' char)
-    // - inside a rect || outside a rect
-
-    // Brush logic functions need to:
-    // - paint canvas layer first 
-    // - set a background color on canvas if brushed outside of a box
-    // - fill canvas with background color 
-    // - draw lines on top of the canvas
-    // - draw rects on top of the canvas
-    // - fill rects with fill color
-
-}
+// }

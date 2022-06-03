@@ -1,4 +1,4 @@
-export default class DrawingModel {
+export default class DrawModel {
 
     private static _backgroundColor: string = ' ';
     private static _canvasAvailable: boolean = false;
@@ -7,43 +7,43 @@ export default class DrawingModel {
     private static _stashedCommands: Array<string> = [];
 
     static set backgroundColor(color: string) {
-        DrawingModel._backgroundColor = color;
+        DrawModel._backgroundColor = color;
     }
 
     static get backgroundColor() {
-        return DrawingModel._backgroundColor;
+        return DrawModel._backgroundColor;
     }
 
     static set canvasAvailable(available: boolean) {
-        DrawingModel._canvasAvailable = available;
+        DrawModel._canvasAvailable = available;
     }
 
     static get canvasAvailable() {
-        return DrawingModel._canvasAvailable;
+        return DrawModel._canvasAvailable;
     }
 
     static set drawingMatrix(matrix: any) {
-        DrawingModel._drawingMatrix = matrix;
+        DrawModel._drawingMatrix = matrix;
     }
 
     static get drawingMatrix() {
-        return DrawingModel._drawingMatrix;
+        return DrawModel._drawingMatrix;
     }
 
     static set instructions(instructions: any) {
-        DrawingModel._instructions = instructions;
+        DrawModel._instructions = instructions;
     }
 
     static get instructions() {
-        return DrawingModel._instructions;
+        return DrawModel._instructions;
     }
 
     static stashCommand(command: string) {
-        DrawingModel._stashedCommands.push(command);
+        DrawModel._stashedCommands.push(command);
     }
 
     static get stashedCommands() {
-        return DrawingModel._stashedCommands;
+        return DrawModel._stashedCommands;
     }
 
 
