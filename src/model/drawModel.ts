@@ -4,13 +4,13 @@ export default class DrawModel {
     private static _canvasAvailable: boolean = false;
     private static _drawingMatrix: Array<Array<string>> = [];
     private static _instructions: any = { C: 2, L: 4, R: 4, B: 3, Q: 0 };
-    private static _stashedCommands: Array<string> = [];
+    private static _stashedCommands: string[] = [];
 
     static set backgroundColor(color: string) {
         DrawModel._backgroundColor = color;
     }
 
-    static get backgroundColor() {
+    static get backgroundColor(): string {
         return DrawModel._backgroundColor;
     }
 
@@ -18,7 +18,7 @@ export default class DrawModel {
         DrawModel._canvasAvailable = available;
     }
 
-    static get canvasAvailable() {
+    static get canvasAvailable(): boolean {
         return DrawModel._canvasAvailable;
     }
 
@@ -26,7 +26,7 @@ export default class DrawModel {
         DrawModel._drawingMatrix = matrix;
     }
 
-    static get drawingMatrix() {
+    static get drawingMatrix(): string[][] {
         return DrawModel._drawingMatrix;
     }
 
@@ -34,7 +34,7 @@ export default class DrawModel {
         DrawModel._instructions = instructions;
     }
 
-    static get instructions() {
+    static get instructions(): any {
         return DrawModel._instructions;
     }
 
@@ -42,7 +42,7 @@ export default class DrawModel {
         DrawModel._stashedCommands.push(command);
     }
 
-    static get stashedCommands() {
+    static get stashedCommands(): string[] {
         return DrawModel._stashedCommands;
     }
 
