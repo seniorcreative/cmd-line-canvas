@@ -6,9 +6,7 @@
   "scripts": {
     "test": "jest --verbose",
     "build": "tsc --project tsconfig.build.json",
-    "start": "node dist/index.js",
-    "lint": "npx eslint src/index.ts",
-    "lint-fix": "npx eslint src/index.ts --fix"
+    "start": "node dist/index.js"
   },
   "author": "Steven Smith",
   "license": "ISC",
