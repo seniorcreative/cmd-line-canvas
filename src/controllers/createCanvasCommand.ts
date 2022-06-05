@@ -1,17 +1,17 @@
 import { CommandLineCanvas } from "../core/commandLineCanvas";
 import { CanvasProvider } from "../core/canvasProvider";
-import { Command } from '../model/commandTypes'
+import { Command } from "../model/commandTypes";
 
 export class CreateCanvasCommand implements Command {
 
-    constructor(
+	constructor(
         public readonly width: number,
         public readonly height: number,
         private readonly canvasProvider: CanvasProvider,
-    ) { }
+	) { }
 
-    execute(): void {
-        const canvas = new CommandLineCanvas(this.width, this.height);
-        this.canvasProvider.register(canvas);
-    }
+	execute(): void {
+		const canvas = new CommandLineCanvas(this.width, this.height);
+		this.canvasProvider.register(canvas);
+	}
 }

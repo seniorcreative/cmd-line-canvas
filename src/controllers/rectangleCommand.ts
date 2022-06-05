@@ -4,14 +4,14 @@ import { Point } from "../model/drawingTypes";
 
 export class RectangleCommand implements Command {
 
-    constructor(
+	constructor(
         public readonly from: Point,
         public readonly to: Point,
         private readonly canvasProvider: CanvasProvider,
-    ) { }
+	) { }
 
-    execute(): void {
-        const canvas = this.canvasProvider.canvas;
-        canvas.drawRectangle(this.from, this.to);
-    }
+	execute(): void {
+		const canvas = this.canvasProvider.canvas;
+		canvas.drawRectangle(this.from, this.to);
+	}
 }

@@ -4,14 +4,14 @@ import { Point } from "../model/drawingTypes";
 
 export class FillAreaCommand implements Command {
 
-    constructor(
+	constructor(
         public readonly point: Point,
         public readonly color: string,
         private readonly canvasProvider: CanvasProvider,
-    ) { }
+	) { }
 
-    execute(): void {
-        const canvas = this.canvasProvider.canvas;
-        canvas.fillArea(this.point, this.color);
-    }
+	execute(): void {
+		const canvas = this.canvasProvider.canvas;
+		canvas.fillArea(this.point, this.color);
+	}
 }
