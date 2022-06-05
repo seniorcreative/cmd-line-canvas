@@ -1,6 +1,6 @@
 import { CommandDescriptor } from "../model";
-import { NumberUtils } from "../common/NumberUtils";
-import DrawModel from "../model/DrawModel";
+import { NumberUtils } from "../common/numberUtils";
+import DrawModel from "../model/drawModel";
 
 export class CommandParser {
 

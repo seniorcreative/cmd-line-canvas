@@ -1,5 +1,5 @@
-import { CommandLineCanvas } from "../core/CommandLineCanvas";
-import { CanvasProvider } from "../model/CanvasProvider";
+import { CommandLineCanvas } from "../core/commandLineCanvas";
+import { CanvasProvider } from "../core/canvasProvider";
 import { Command } from "../types/commandTypes";
 
 export class CreateCanvasCommand implements Command {
@@ -10,7 +10,7 @@ export class CreateCanvasCommand implements Command {
         private readonly canvasProvider: CanvasProvider,
     ) { }
 
-    execute() {
+    execute(): void {
         const canvas = new CommandLineCanvas(this.width, this.height);
         this.canvasProvider.register(canvas);
     }

@@ -1,6 +1,6 @@
-import { CanvasProvider } from "../model/CanvasProvider";
+import { CanvasProvider } from "../core/canvasProvider";
 import { Command } from "../types/commandTypes";
-import { Point } from "../types/drawingTypes";
+import { Point } from "../model/drawingTypes";
 
 export class LineCommand implements Command {
 
@@ -10,7 +10,7 @@ export class LineCommand implements Command {
         private readonly canvasProvider: CanvasProvider,
     ) { }
 
-    execute() {
+    execute(): void {
         const canvas = this.canvasProvider.canvas;
         canvas.drawLine(this.from, this.to);
     }

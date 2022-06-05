@@ -1,36 +1,25 @@
-import { NumberUtils } from "../common/NumberUtils";
-import { Point } from "../types/drawingTypes";
+import { NumberUtils } from "../common/numberUtils";
+import { Point } from "../model/drawingTypes";
 
 export abstract class Canvas {
 
-    private _matrix: Array<Array<string>> = [];
     private _backgroundColor: string = ' ';
+    public _matrix: string[][];
 
     constructor(
         public readonly width: number,
         public readonly height: number
     ) { }
 
-    draw() {
-        let fullRow = new Array(this.width).fill('-');
-        let borderRow = [];
-        let midRows = [];
-
-        for (let col: number = 0; col < this.width; col++) {
-            borderRow.push(col === 0 || col === this.width - 1 ? '|' : this.backgroundColor);
-        }
-        for (let row: number = 0; row < this.height - 2; row++) {
-            midRows.push(JSON.parse(JSON.stringify(borderRow)));
-        }
-        this._matrix = [fullRow].concat(midRows).concat([fullRow]);
-    }
-
     isWithin(point: Point): boolean {
-        return true;
+        const xWithin = (point.x > 0) && (point.x < this.width)
+        const yWithin = (point.y > 0) && (point.y < this.height)
+        return xWithin && yWithin;
     }
 
-    drawLine(from: Point, to: Point,): void {
-
+    drawLine(from: Point, to: Point): void {
+        if (!this.isWithin(from)) throw new Error('Point "from" is out of the canvas');
+        if (!this.isWithin(to)) throw new Error('Point "to" is out of the canvas');
         if (from.y === to.y) {  // Horizontal line
             let rowLine = this._matrix[from.y];
             for (let col = from.x; col <= to.x; col++) {
@@ -47,6 +36,8 @@ export abstract class Canvas {
     }
 
     drawRectangle(from: Point, to: Point): void {
+        if (!this.isWithin(from)) throw new Error('Point "from" is out of the canvas');
+        if (!this.isWithin(to)) throw new Error('Point "to" is out of the canvas');
         // Top row
         let rowLineTop = this._matrix[from.y];
         for (let col = from.x; col <= to.x; col++) {
@@ -75,7 +66,7 @@ export abstract class Canvas {
     }
 
     fillArea(point: Point, color: string): void {
-
+        if (!this.isWithin(point)) throw new Error('Point of brush mark is out of the canvas');
         //     // Brush coords need to be:
         //     // - within canvas bounds
         //     // - not on a line (or anything that is an 'x' char)

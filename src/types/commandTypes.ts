@@ -1,4 +1,4 @@
-import { Point } from "./drawingTypes";
+import { Point } from "../model/drawingTypes";
 
 export interface Command {
     execute(): void;

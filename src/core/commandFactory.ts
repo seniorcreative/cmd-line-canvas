@@ -1,10 +1,10 @@
 import { CommandDescriptor } from "../model";
 import { Command } from "../types/commandTypes";
-import { CreateCanvasCommand } from "../controllers/CreateCanvasCommand";
-import { CanvasProvider } from "../model/CanvasProvider";
-import { LineCommand } from "../controllers/LineCommand";
-import { RectangleCommand } from "../controllers/RectangleCommand";
-import { FillAreaCommand } from "../controllers/FillAreaCommand";
+import { CreateCanvasCommand } from "../controllers/createCanvasCommand";
+import { CanvasProvider } from "./canvasProvider";
+import { LineCommand } from "../controllers/lineCommand";
+import { RectangleCommand } from "../controllers/rectangleCommand";
+import { FillAreaCommand } from "../controllers/fillAreaCommand";
 
 export class CommandFactory {
 

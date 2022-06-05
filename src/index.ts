@@ -1,8 +1,8 @@
 import { createInterface } from "readline";
-import { App } from "./controllers/App";
-import { CommandParser } from "./core/CommandParser";
+import { App } from "./app";
+import { CommandParser } from "./core/ParseCommand";
 import { CommandFactory } from "./core/CommandFactory";
-import { CanvasProvider } from "./model/CanvasProvider";
+import { CanvasProvider } from "./core/canvasProvider";
 
 const readline = createInterface({
     input: process.stdin,

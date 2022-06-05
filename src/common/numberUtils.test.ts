@@ -1,5 +1,5 @@
-import DrawingModel from '../model/DrawModel';
-import { NumberUtils } from "./NumberUtils";
+import DrawingModel from '../model/drawModel';
+import { NumberUtils } from "./numberUtils";
 
 describe('check valid command sequences', () => {
     it('should contain the optimum number of spaces', () => {

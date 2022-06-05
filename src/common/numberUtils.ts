@@ -35,7 +35,7 @@ export class NumberUtils {
         const cmdSplit = cmd.split(" ");
         const firstLetter: string = this.cmdFirstLetter(cmd);
         if (String(firstLetter) === 'C') {
-            return (this.checkWholeNumber(cmdSplit[1]) >= 3 && this.checkWholeNumber(cmdSplit[2]) >= 3)
+            return (this.parseIntOrThrow(cmdSplit[1], 'Canvas width must be an integer') >= 3 && this.parseIntOrThrow(cmdSplit[2], 'Canvas height must be an integer') >= 3)
         } else {
             return true;
         }
@@ -48,7 +48,9 @@ export class NumberUtils {
         switch (firstLetter) {
 
             case 'L':
-                const hasEitherMatches: boolean = (this.checkWholeNumber(cmdSplit[1]) === this.checkWholeNumber(cmdSplit[3]) || this.checkWholeNumber(cmdSplit[2]) === this.checkWholeNumber(cmdSplit[4]))
+                const hasEitherMatches: boolean = (
+                    this.parseIntOrThrow(cmdSplit[1], 'Line x1 must be an integer') === this.parseIntOrThrow(cmdSplit[3], 'Line x2 must be an integer') ||
+                    this.parseIntOrThrow(cmdSplit[2], 'Line y1 must be an integer') === this.parseIntOrThrow(cmdSplit[4], 'Line y2 must be an integer'))
                 return hasEitherMatches;
 
             default:
@@ -68,15 +70,15 @@ export class NumberUtils {
         switch (firstLetter) {
             case "L":
             case "R":
-                const x1WithinBounds: boolean = this.checkWholeNumber(cmdSplit[1]) > 0 && this.checkWholeNumber(cmdSplit[1]) < DrawingModel.drawingMatrix[0].length - 1;
-                const y1WithinBounds: boolean = this.checkWholeNumber(cmdSplit[2]) > 0 && this.checkWholeNumber(cmdSplit[2]) < DrawingModel.drawingMatrix.length - 1;
-                const x2WithinBounds: boolean = this.checkWholeNumber(cmdSplit[3]) > 0 && this.checkWholeNumber(cmdSplit[3]) < DrawingModel.drawingMatrix[0].length - 1;
-                const y2WithinBounds: boolean = this.checkWholeNumber(cmdSplit[4]) > 0 && this.checkWholeNumber(cmdSplit[4]) < DrawingModel.drawingMatrix.length - 1;
+                const x1WithinBounds: boolean = this.parseIntOrThrow(cmdSplit[1], 'x1 must be an integer') > 0 && this.parseIntOrThrow(cmdSplit[1], 'x1 must be an integer') < DrawingModel.drawingMatrix[0].length - 1;
+                const y1WithinBounds: boolean = this.parseIntOrThrow(cmdSplit[2], 'y1 must be an integer') > 0 && this.parseIntOrThrow(cmdSplit[2], 'y1 must be an integer') < DrawingModel.drawingMatrix.length - 1;
+                const x2WithinBounds: boolean = this.parseIntOrThrow(cmdSplit[3], 'x2 must be an integer') > 0 && this.parseIntOrThrow(cmdSplit[3], 'x2 must be an integer') < DrawingModel.drawingMatrix[0].length - 1;
+                const y2WithinBounds: boolean = this.parseIntOrThrow(cmdSplit[4], 'y2 must be an integer') > 0 && this.parseIntOrThrow(cmdSplit[4], 'y2 must be an integer') < DrawingModel.drawingMatrix.length - 1;
                 // console.log(x1WithinBounds, DrawingModel.drawingMatrix[0].length - 1, y1WithinBounds, DrawingModel.drawingMatrix.length - 1, x2WithinBounds, DrawingModel.drawingMatrix[0].length - 1, y2WithinBounds, DrawingModel.drawingMatrix.length - 1);
                 return x1WithinBounds && y1WithinBounds && x2WithinBounds && y2WithinBounds;
             case "B":
-                const xWithinBounds: boolean = this.checkWholeNumber(cmdSplit[1]) > 0 && this.checkWholeNumber(cmdSplit[1]) < DrawingModel.drawingMatrix[0].length - 1;
-                const yWithinBounds: boolean = this.checkWholeNumber(cmdSplit[2]) > 0 && this.checkWholeNumber(cmdSplit[2]) < DrawingModel.drawingMatrix.length - 1;
+                const xWithinBounds: boolean = this.parseIntOrThrow(cmdSplit[1], 'x must be an integer') > 0 && this.parseIntOrThrow(cmdSplit[1], 'x must be an integer') < DrawingModel.drawingMatrix[0].length - 1;
+                const yWithinBounds: boolean = this.parseIntOrThrow(cmdSplit[2], 'y must be an integer') > 0 && this.parseIntOrThrow(cmdSplit[2], 'y must be an integer') < DrawingModel.drawingMatrix.length - 1;
                 return xWithinBounds && yWithinBounds;
             default:
                 return true;
@@ -86,13 +88,6 @@ export class NumberUtils {
 
     static canvasAvailableForCommand(cmd: string) {
         return this.cmdFirstLetter(cmd) !== "C" ? DrawingModel.canvasAvailable === true : true
-    }
-
-    // Check for trying to pass decimals
-    static checkWholeNumber(val: any) {
-        const num: number = Number(val);
-        if (isNaN(num)) return 0;
-        return num % 1 === 0 ? num : 0;
     }
 
     static cmdFirstLetter(cmd: string) {
@@ -115,11 +110,11 @@ export class NumberUtils {
     }
 
     static parseIntOrThrow(value: any, errorMessage: string) {
-        if (parseInt(value)) {
-            return parseInt(value)
-        } else {
-            throw new Error(errorMessage)
-        }
+        const number = parseInt(value);
+
+        if (isNaN(number)) throw new Error(errorMessage)
+
+        return number;
     }
 
     static dumpOutput(output: any) {
