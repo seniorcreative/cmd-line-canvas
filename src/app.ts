@@ -11,7 +11,7 @@ export class App {
         private readonly canvasProvider: CanvasProvider
     ) { }
 
-    public handleInput(input: string) {
+    public handleInput(input: string): void {
         const commandDescriptor = this.commandParser.parse(input);
         const command = this.commandFactory.create(commandDescriptor);
         command.execute();
