@@ -1,18 +1,9 @@
 export default class DrawModel {
 
-    private static _backgroundColor: string = ' ';
     private static _canvasAvailable: boolean = false;
     private static _drawingMatrix: Array<Array<string>> = [];
     private static _instructions: any = { C: 2, L: 4, R: 4, B: 3, Q: 0 };
     private static _stashedCommands: string[] = [];
-
-    static set backgroundColor(color: string) {
-        DrawModel._backgroundColor = color;
-    }
-
-    static get backgroundColor(): string {
-        return DrawModel._backgroundColor;
-    }
 
     static set canvasAvailable(available: boolean) {
         DrawModel._canvasAvailable = available;

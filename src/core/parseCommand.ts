@@ -1,6 +1,5 @@
 import { CommandDescriptor } from "../model";
 import { NumberUtils } from "../common/numberUtils";
-import DrawModel from "../model/drawModel";
 
 export class CommandParser {
 
@@ -26,9 +25,8 @@ export class CommandParser {
         const width = NumberUtils.parseIntOrThrow(params[0], 'Canvas width must be an integer');
         const height = NumberUtils.parseIntOrThrow(params[1], 'Canvas height must be an integer');
         NumberUtils.cmdCanvasSizeCheckOrThrow(width, height, 'Canvas size is too small');
-        const backgroundColor = DrawModel.backgroundColor;
 
-        return { command: 'CREATE_CANVAS', width, height, backgroundColor };
+        return { command: 'CREATE_CANVAS', width, height };
 
     }
 

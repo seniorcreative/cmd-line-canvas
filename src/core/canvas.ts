@@ -83,7 +83,7 @@ export abstract class Canvas {
         return;
     }
 
-    render() {
+    render(): void {
         // Print the canvas in the terminal
         NumberUtils.dumpOutput(this._matrix);
     }
@@ -96,11 +96,11 @@ export abstract class Canvas {
         this._backgroundColor = backgroundColor;
     }
 
-    public get matrix(): Array<Array<string>> {
+    public get matrix(): string[][] {
         return this._matrix;
     }
 
-    public set matrix(matrix: Array<Array<string>>) {
+    public set matrix(matrix: string[][]) {
         this._matrix = matrix;
     }
 
