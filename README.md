@@ -27,8 +27,10 @@ npm run test
 ```
 
 ## Linting
-Not yet added.
-
+```sh
+# Run linting
+npm run lint
+```
 
 ## Reference
 

@@ -1,4 +1,4 @@
-import { CommandParser } from './core/parseCommand';
+import { CommandParser } from './core/_commandParser';
 import { CommandFactory } from './core/commandFactory';
 import { CanvasProvider } from './core/canvasProvider';
 import { Canvas } from './core/canvas';
