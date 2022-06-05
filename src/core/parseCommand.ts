@@ -25,6 +25,7 @@ export class CommandParser {
 
         const width = NumberUtils.parseIntOrThrow(params[0], 'Canvas width must be an integer');
         const height = NumberUtils.parseIntOrThrow(params[1], 'Canvas height must be an integer');
+        if (!NumberUtils.cmdCanvasParamsCheck(width, height)) throw new Error('Canvas size is too small');
         const backgroundColor = DrawModel.backgroundColor;
 
         return { command: 'CREATE_CANVAS', width, height, backgroundColor };

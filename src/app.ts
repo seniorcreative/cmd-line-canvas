@@ -1,7 +1,7 @@
-import { CommandParser } from './core/ParseCommand';
-import { CommandFactory } from './core/CommandFactory';
+import { CommandParser } from './core/parseCommand';
+import { CommandFactory } from './core/commandFactory';
 import { CanvasProvider } from './core/canvasProvider';
-import { Canvas } from './core/Canvas';
+import { Canvas } from './core/canvas';
 
 export class App {
 

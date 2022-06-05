@@ -1,7 +1,7 @@
 import { createInterface } from "readline";
 import { App } from "./app";
-import { CommandParser } from "./core/ParseCommand";
-import { CommandFactory } from "./core/CommandFactory";
+import { CommandParser } from "./core/parseCommand";
+import { CommandFactory } from "./core/commandFactory";
 import { CanvasProvider } from "./core/canvasProvider";
 
 const readline = createInterface({

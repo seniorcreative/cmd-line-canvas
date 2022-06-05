@@ -4,7 +4,7 @@ import { Point } from "../model/drawingTypes";
 export abstract class Canvas {
 
     private _backgroundColor: string = ' ';
-    public _matrix: string[][];
+    public _matrix: string[][] = [[]];
 
     constructor(
         public readonly width: number,

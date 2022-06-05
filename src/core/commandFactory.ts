@@ -1,5 +1,5 @@
 import { CommandDescriptor } from "../model";
-import { Command } from "../types/commandTypes";
+import { Command } from "../model/commandTypes";
 import { CreateCanvasCommand } from "../controllers/createCanvasCommand";
 import { CanvasProvider } from "./canvasProvider";
 import { LineCommand } from "../controllers/lineCommand";

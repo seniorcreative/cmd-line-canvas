@@ -1,15 +1,7 @@
 
-import DrawingModel from "../model/DrawModel";
+import DrawingModel from "../model/drawModel";
 
 export class NumberUtils {
-
-    static cmdHasMinSpaces(cmd: string, numSpaces: number) {
-        return (cmd.split(" ").length - 1) >= numSpaces;
-    }
-
-    static cmdHasMaxSpaces(cmd: string, numSpaces: number) {
-        return (cmd.split(" ").length - 1) <= numSpaces;
-    }
 
     static cmdFirstLetterIsAlpha(cmd: string) {
         return isNaN(Number(this.cmdFirstLetter(cmd)));
@@ -31,14 +23,8 @@ export class NumberUtils {
     }
 
     // A canvas needs to be a minimum of 3 x 3
-    static cmdCanvasParamsCheck(cmd: string) {
-        const cmdSplit = cmd.split(" ");
-        const firstLetter: string = this.cmdFirstLetter(cmd);
-        if (String(firstLetter) === 'C') {
-            return (this.parseIntOrThrow(cmdSplit[1], 'Canvas width must be an integer') >= 3 && this.parseIntOrThrow(cmdSplit[2], 'Canvas height must be an integer') >= 3)
-        } else {
-            return true;
-        }
+    static cmdCanvasParamsCheck(width: number, height: number): boolean {
+        return (width > 2 && height > 2);
     }
 
     // A line needs to have either x or y values that are equal
@@ -86,27 +72,10 @@ export class NumberUtils {
 
     }
 
-    static canvasAvailableForCommand(cmd: string) {
-        return this.cmdFirstLetter(cmd) !== "C" ? DrawingModel.canvasAvailable === true : true
-    }
-
     static cmdFirstLetter(cmd: string) {
         const cmdSplit = cmd.split(" ");
         const firstLetter: string = cmdSplit[0].toUpperCase();
         return firstLetter;
-    }
-
-    // Composite function
-    static cmdIsValid(cmd: string) {
-        return this.cmdHasMinSpaces(cmd, 2) &&
-            this.cmdHasMaxSpaces(cmd, 4) &&
-            this.cmdFirstLetterIsAlpha(cmd) &&
-            this.cmdFirstLetterIsValid(cmd) &&
-            this.cmdCanvasParamsCheck(cmd) &&
-            this.cmdLineParamsCheck(cmd) &&
-            this.cmdBoundsCheck(cmd) &&
-            this.canvasAvailableForCommand(cmd) &&
-            this.cmdHasCorrectNumArgs(cmd) === DrawingModel.instructions[this.cmdFirstLetter(cmd)]
     }
 
     static parseIntOrThrow(value: any, errorMessage: string) {

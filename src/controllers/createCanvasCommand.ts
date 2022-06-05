@@ -1,6 +1,6 @@
 import { CommandLineCanvas } from "../core/commandLineCanvas";
 import { CanvasProvider } from "../core/canvasProvider";
-import { Command } from "../types/commandTypes";
+import { Command } from "../model/commandTypes";
 
 export class CreateCanvasCommand implements Command {
 

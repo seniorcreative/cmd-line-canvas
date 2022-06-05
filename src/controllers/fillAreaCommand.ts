@@ -1,5 +1,5 @@
 import { CanvasProvider } from "../core/canvasProvider";
-import { Command } from "../types/commandTypes";
+import { Command } from "../model/commandTypes";
 import { Point } from "../model/drawingTypes";
 
 export class FillAreaCommand implements Command {
