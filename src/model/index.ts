@@ -1,4 +1,4 @@
-import { Point } from "../types/drawingTypes";
+import { Point } from "./drawingTypes";
 
 export interface CreateCanvasCommandDescriptor {
     readonly command: 'CREATE_CANVAS',
