@@ -1,3 +1,4 @@
+import { Point } from '../model/drawingTypes';
 import DrawingModel from '../model/drawModel';
 import { NumberUtils } from "./numberUtils";
 
@@ -29,12 +30,9 @@ describe('check valid command sequences', () => {
             ['|', ' ', ' ', ' ', '|'],
             ['-', '-', '-', '-', '-']];
 
-        const inputA = 'L 2 3 3 3';
-        expect(NumberUtils.cmdLineParamsCheck(inputA)).toBeTruthy();
-        const inputB = 'L 3 3 4 4';
-        expect(NumberUtils.cmdLineParamsCheck(inputB)).toBeFalsy();
-        const inputC = 'L 1 1 10 10';
-        expect(NumberUtils.cmdLineParamsCheck(inputC)).toBeFalsy();
+        const from: Point = { x: 2, y: 3 };
+        const to: Point = { x: 3, y: 3 };
+        expect(NumberUtils.cmdLineParamsCheckOrThrow(from, to, 'The from point and to point for Line are not valid')).toBeTruthy();
     })
 
     it('commands for drawings have param values within bounds ', () => {

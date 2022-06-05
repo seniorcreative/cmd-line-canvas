@@ -25,7 +25,7 @@ export class CommandParser {
 
         const width = NumberUtils.parseIntOrThrow(params[0], 'Canvas width must be an integer');
         const height = NumberUtils.parseIntOrThrow(params[1], 'Canvas height must be an integer');
-        if (!NumberUtils.cmdCanvasParamsCheck(width, height)) throw new Error('Canvas size is too small');
+        NumberUtils.cmdCanvasSizeCheckOrThrow(width, height, 'Canvas size is too small');
         const backgroundColor = DrawModel.backgroundColor;
 
         return { command: 'CREATE_CANVAS', width, height, backgroundColor };
@@ -41,8 +41,9 @@ export class CommandParser {
             x: NumberUtils.parseIntOrThrow(params[2], 'x2 must be an integer'),
             y: NumberUtils.parseIntOrThrow(params[3], 'y2 must be an integer')
         };
+        NumberUtils.cmdLineParamsCheckOrThrow(from, to, 'The from point and to point for Line are not valid');
 
-        return { command: 'DRAW_LINE', to, from };
+        return { command: 'DRAW_LINE', from, to };
     }
 
     parseDrawRectangleCommand(params: string[]): CommandDescriptor {

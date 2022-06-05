@@ -38,4 +38,5 @@ Add a list of useful links here (if any).
 * Cannot create a canvas with a decimal
 * Cannot create a canvas with number for width or height less than 3
 * Cannot create a canvas with non numeric width and height
+* Handle lowercase commands
 * There must be a canvas before any other drawing commands can be called
