@@ -1,4 +1,4 @@
-import { NumberUtils } from "../common/numberUtils";
+import { CommandUtils } from "../common/commandUtils";
 import { Point } from "../model/drawingTypes";
 
 export abstract class Canvas {
@@ -85,7 +85,7 @@ export abstract class Canvas {
 
     render(): void {
         // Print the canvas in the terminal
-        NumberUtils.dumpOutput(this._matrix);
+        CommandUtils.dumpOutput(this._matrix);
     }
 
     public get backgroundColor(): string {
