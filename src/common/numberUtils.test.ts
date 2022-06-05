@@ -20,12 +20,6 @@ describe('check valid command sequences', () => {
         expect(NumberUtils.cmdHasCorrectNumArgs(inputD)).toBe(0);
     })
 
-    it('checks if canvas becomes available', () => {
-        expect(DrawingModel.canvasAvailable).toBeFalsy()
-        DrawingModel.canvasAvailable = true;
-        expect(DrawingModel.canvasAvailable).toBeTruthy();
-    })
-
     it('command for line has valid param values for x1,y1,x2,y2 meaning it will be horizontal or vertical', () => {
         DrawingModel.drawingMatrix = [
             ['-', '-', '-', '-', '-'],
