@@ -25,4 +25,8 @@ export interface FillAreaCommandDescriptor {
     readonly color: string
 }
 
-export type CommandDescriptor = CreateCanvasCommandDescriptor | DrawLineCommandDescriptor | DrawRectangleCommandDescriptor | FillAreaCommandDescriptor;
+export interface QuitCommandDescriptor {
+    readonly command: "QUIT"
+}
+
+export type CommandDescriptor = CreateCanvasCommandDescriptor | DrawLineCommandDescriptor | DrawRectangleCommandDescriptor | FillAreaCommandDescriptor | QuitCommandDescriptor;

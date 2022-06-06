@@ -5,6 +5,7 @@ import { CanvasProvider } from "./canvasProvider";
 import { LineCommand } from "../controllers/lineCommand";
 import { RectangleCommand } from "../controllers/rectangleCommand";
 import { FillAreaCommand } from "../controllers/fillAreaCommand";
+import { QuitCommand } from "../controllers/quitCommand";
 
 export class CommandFactory {
 
@@ -24,6 +25,9 @@ export class CommandFactory {
 			break;
 		case "FILL_AREA":
 			command = new FillAreaCommand(input.point, input.color, CanvasProvider.getInstance());
+			break;
+		case "QUIT":
+			command = new QuitCommand();
 			break;
 		default:
 			throw new Error("no command found");
