@@ -12,8 +12,8 @@ export abstract class Canvas {
 	) { }
 
 	isWithin(point: Point): boolean {
-		const xWithin = (point.x > 0) && (point.x < this.width);
-		const yWithin = (point.y > 0) && (point.y < this.height);
+		const xWithin = (point.x > 0) && (point.x < this.width - 1);
+		const yWithin = (point.y > 0) && (point.y < this.height - 1);
 		return xWithin && yWithin;
 	}
 

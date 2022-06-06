@@ -3,8 +3,7 @@ import { Point } from "./drawingTypes";
 export interface CreateCanvasCommandDescriptor {
     readonly command: "CREATE_CANVAS",
     readonly width: number,
-    readonly height: number,
-    readonly backgroundColor?: string
+    readonly height: number
 }
 
 export interface DrawLineCommandDescriptor {
