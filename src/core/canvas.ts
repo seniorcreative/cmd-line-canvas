@@ -17,7 +17,7 @@ export abstract class Canvas {
 		return xWithin && yWithin;
 	}
 
-	drawLine(from: Point, to: Point): void {
+	drawLine(from: Point, to: Point): string[][] {
 		if (!this.isWithin(from)) throw new Error("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new Error("Point \"to\" is out of the canvas");
 		if (from.y === to.y) {  // Horizontal line
@@ -25,17 +25,18 @@ export abstract class Canvas {
 			for (let col = from.x; col <= to.x; col++) {
 				rowLine[col] = "x";
 			}
+			return this._matrix;
 		} else if (from.x === to.x) { // Vertical line
 			for (let row = from.y; row <= to.y; row++) {
 				this._matrix[row][from.x] = "x";
 			}
+			return this._matrix;
 		} else {
 			throw new Error("Line co-ords do not correspond with vertical or horizontal");
 		}
-
 	}
 
-	drawRectangle(from: Point, to: Point): void {
+	drawRectangle(from: Point, to: Point): string[][] {
 		if (!this.isWithin(from)) throw new Error("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new Error("Point \"to\" is out of the canvas");
 		// Top row
@@ -63,6 +64,7 @@ export abstract class Canvas {
 		for (let col = from.x; col <= to.x; col++) {
 			rowLineBottom[col] = "x";
 		}
+		return this._matrix;
 	}
 
 	fillArea(point: Point, color: string): void {

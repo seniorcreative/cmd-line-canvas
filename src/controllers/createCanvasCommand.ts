@@ -10,8 +10,9 @@ export class CreateCanvasCommand implements Command {
         private readonly canvasProvider: CanvasProvider,
 	) { }
 
-	execute(): void {
+	execute(): CanvasProvider {
 		const canvas = new CommandLineCanvas(this.width, this.height);
 		this.canvasProvider.register(canvas);
+		return this.canvasProvider;
 	}
 }
