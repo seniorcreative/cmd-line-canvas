@@ -7,13 +7,13 @@ export abstract class Canvas {
 	public _matrix: string[][] = [[]];
 
 	constructor(
-        public readonly width: number,
-        public readonly height: number
+		public readonly width: number,
+		public readonly height: number
 	) { }
 
 	isWithin(point: Point): boolean {
-		const xWithin = (point.x > 0) && (point.x < this.width - 1);
-		const yWithin = (point.y > 0) && (point.y < this.height - 1);
+		const xWithin = (point.x > 0) && (point.x <= this.width);
+		const yWithin = (point.y > 0) && (point.y <= this.height);
 		return xWithin && yWithin;
 	}
 
@@ -47,7 +47,7 @@ export abstract class Canvas {
 
 		// Mid rows (with fill if brushed inside)
 		if ((from.y + 1) < to.y) {
-			for (let row = from.y + 1; row < to.y; row++) {
+			for (let row = from.y + 1; row <= to.y; row++) {
 				const rowLine = this._matrix[row];
 				for (let col = from.x; col <= to.x; col++) {
 					if (col === from.x || col === to.x) {
