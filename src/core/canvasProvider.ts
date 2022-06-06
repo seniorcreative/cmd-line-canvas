@@ -17,7 +17,7 @@ export class CanvasProvider {
 	}
 
 	public get canvas(): Canvas {
-		if (!this._canvas) throw new Error("There's no canvas yet. Create one with the C command.'");
+		if (!this._canvas) throw new Error("There's no canvas yet. Create one with the 'C' command.");
 		return this._canvas;
 	}
 }
