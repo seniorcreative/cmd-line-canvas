@@ -45,7 +45,7 @@ describe("Check canvas abstract methods", () => {
 	});
 
 	it("Should create a rectangle in the correct place", () => {
-		expect(canvas.drawRectangle({ x: 1, y: 1 }, { x: 4, y: 4 })).toEqual([
+		expect(canvas.drawRectangle({ x: 1, y: 1 }, { x: 4, y: 4 }, " ")).toEqual([
 			["-", "-", "-", "-", "-", "-", "-"],
 			["|", "x", "x", "x", "x", " ", "|"],
 			["|", "x", " ", " ", "x", " ", "|"],
@@ -53,6 +53,10 @@ describe("Check canvas abstract methods", () => {
 			["|", "x", "x", "x", "x", " ", "|"],
 			["|", " ", " ", " ", " ", " ", "|"],
 			["-", "-", "-", "-", "-", "-", "-"]]);
+	});
+
+	it("Should throw if trying to draw on a line or border", () => {
+		expect(canvas.fillObjectAtBrushPoint({x: 0, y: 0}, "o", new Set())).toThrowError("Point of brush mark is out of the canvas");
 	});
 
 });

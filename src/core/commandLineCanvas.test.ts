@@ -15,7 +15,7 @@ describe("Check command line canvas methods", () => {
 	});
 
 	it("Should create an empty 3 x 3 matrix for the canvas with a border of 1 around it on all sides", () => {
-		expect(canvasProviderInstance.canvas._matrix).toEqual([
+		expect(canvas.matrix).toEqual([
 			["-", "-", "-", "-", "-"],
 			["|", " ", " ", " ", "|"],
 			["|", " ", " ", " ", "|"],

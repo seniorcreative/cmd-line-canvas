@@ -11,7 +11,7 @@ export class FillAreaCommand implements Command {
 		public readonly point: Point,
 		public readonly color: string,
 		private readonly canvasProvider: CanvasProvider,
-		private readonly rectangleCommands: DrawRectangleCommandDescriptor[]
+		private readonly rectangleCommands: Set<DrawRectangleCommandDescriptor>
 	) { 
 		if (!canvasProvider.canvas) {
 			throw new OperationalError("There's no canvas yet. Create one with the \"C\" command");

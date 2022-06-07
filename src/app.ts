@@ -17,13 +17,14 @@ export class App {
 	public handleInput(input: string): void {
 		try {
 			const commandDescriptor = this.commandParser.parse(input);
-			this.commandStore.store(commandDescriptor);
 			const command = this.commandFactory.create(commandDescriptor, this.commandStore);
 			command.execute();
 
 			const canvas: CommandLineCanvas | null = this.canvasProvider.canvas;
-			canvas && canvas.generate(this.commandStore); 
-			canvas && canvas.render(); 
+			if (canvas) {
+				canvas.generate(this.commandStore); 
+				canvas.render(); 
+			}
 		} catch (e) {
 			if (e instanceof OperationalError) {
 				return console.warn(`Sorry, cannot process that command. ${e.description}.\nPlease try again.`);

@@ -20,10 +20,10 @@ export class CommandFactory {
 			command = new CreateCanvasCommand(input.width, input.height, CanvasProvider.getInstance());
 			break;
 		case "DRAW_LINE":
-			command = new LineCommand(input.from, input.to, CanvasProvider.getInstance());
+			command = new LineCommand(input.from, input.to, CanvasProvider.getInstance(), commandStore.lineCommands);
 			break;
 		case "DRAW_RECTANGLE":
-			command = new RectangleCommand(input.from, input.to, input.fillColor, CanvasProvider.getInstance());
+			command = new RectangleCommand(input.from, input.to, input.fillColor, CanvasProvider.getInstance(), commandStore.rectangleCommands);
 			break;
 		case "FILL_AREA":
 			command = new FillAreaCommand(input.point, input.color, CanvasProvider.getInstance(), commandStore.rectangleCommands);
