@@ -12,12 +12,12 @@ export class CommandParser {
 			.filter(Boolean);
 
 		switch (command) {
-			case "C": return this.parseCreateCanvasCommand(params);
-			case "L": return this.parseDrawLineCommand(params);
-			case "R": return this.parseDrawRectangleCommand(params);
-			case "B": return this.parseFillAreaCommand(params);
-			case "Q": return this.parseQuitCommand();
-			default: throw new OperationalError("Unexpected command.");
+		case "C": return this.parseCreateCanvasCommand(params);
+		case "L": return this.parseDrawLineCommand(params);
+		case "R": return this.parseDrawRectangleCommand(params);
+		case "B": return this.parseFillAreaCommand(params);
+		case "Q": return this.parseQuitCommand();
+		default: throw new OperationalError("Unexpected command.");
 		}
 
 	}

@@ -7,8 +7,8 @@ export class NumberUtils {
 		if (!(width > 2 && height > 2)) throw new OperationalError(errorMessage);
 	}
 
-	static parseIntOrThrow(value: any, errorMessage: string): number {
-		const number = parseInt(value);
+	static parseIntOrThrow(value: unknown, errorMessage: string): number {
+		const number = parseInt(String(value));
 
 		if (isNaN(number)) throw new OperationalError(errorMessage);
 
