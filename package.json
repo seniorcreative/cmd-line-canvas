@@ -1,12 +1,14 @@
 {
-  "name": "cs",
+  "name": "command-line-drawing",
   "version": "1.0.0",
-  "description": "node and typescript command line project",
-  "main": "index.ts",
+  "description": "This is a node and typescript command line project",
+  "main": "src/index.ts",
   "scripts": {
     "test": "jest --verbose",
-    "build": "tsc --project tsconfig.build.json",
-    "start": "node dist/index.js"
+    "build": "npm run lint-fix && tsc --project tsconfig.build.json",
+    "start": "node dist/index.js",
+    "lint": "npx eslint src/*",
+    "lint-fix": "npx eslint src/* --fix"
   },
   "author": "Steven Smith",
   "license": "ISC",
@@ -14,6 +16,13 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.17.12",
     "@types/jest": "^27.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.17.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.1",
+    "eslint-plugin-promise": "^6.0.0",
     "jest": "^28.1.0",
     "ts-jest": "^28.0.3",
     "ts-node": "^10.8.0",
