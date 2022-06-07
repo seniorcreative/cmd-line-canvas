@@ -8,9 +8,6 @@ export class OperationalError extends Error {
 		this.description = description;
 
 		Object.setPrototypeOf(this, new.target.prototype);
-
-		Error.captureStackTrace(this);
-
 	}
 
 

@@ -19,15 +19,15 @@ export abstract class Canvas {
 	}
 
 	isWithin(point: Point): boolean {
-		const xWithin = (point.x > 0) && (point.x <= this.width);
-		const yWithin = (point.y > 0) && (point.y <= this.height);
+		const xWithin = (point.x > 0) && (point.x < this.width+1);
+		const yWithin = (point.y > 0) && (point.y < this.height+1);
 		return xWithin && yWithin;
 	}
 
 	drawLine(from: Point, to: Point): string[][] {
 		if (!this.isWithin(from)) throw new OperationalError("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new OperationalError("Point \"to\" is out of the canvas");
-		if (from.x != to.x && from.y != to.y) throw new OperationalError("The \"from\" point or \"to\"point for Line is not valid");
+		if (from.x != to.x && from.y != to.y) throw new OperationalError("The \"from\" point or \"to\" point for Line is not valid");
 
 		if (from.y === to.y) {  // Horizontal line
 			const rowLine = this._matrix[from.y];
@@ -78,6 +78,7 @@ export abstract class Canvas {
 
 	fillArea(point: Point, color: string, rectangleCommands: DrawRectangleCommandDescriptor[]): void {
 		if (!this.isWithin(point)) throw new OperationalError("Point of brush mark is out of the canvas");
+		if (color && color.length > 1) throw new OperationalError("Please use a color that is ony one character in length");
 		this.fillObjectAtBrushPoint(point, color, rectangleCommands);
 	}
 

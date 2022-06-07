@@ -19,7 +19,7 @@ describe("Check canvas abstract methods", () => {
 	});
 
 	it("Should throw error when trying a non vertical or horizontal line", () => {
-		expect(() => { canvas.drawLine({ x: 1, y: 1 }, { x: 3, y: 3 }); }).toThrowError("The \"from\" point or \"to\"point for Line is not valid");
+		expect(() => { canvas.drawLine({ x: 1, y: 1 }, { x: 3, y: 3 }); }).toThrowError("The \"from\" point or \"to\" point for Line is not valid");
 	});
 
 	it("Should create a horizontal line in the correct place", () => {

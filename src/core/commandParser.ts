@@ -17,7 +17,7 @@ export class CommandParser {
 		case "R": return this.parseDrawRectangleCommand(params);
 		case "B": return this.parseFillAreaCommand(params);
 		case "Q": return this.parseQuitCommand();
-		default: throw new OperationalError("Unexpected command.");
+		default: throw new OperationalError("Try uppercase commands C, L, R, B or Q");
 		}
 
 	}
@@ -55,7 +55,7 @@ export class CommandParser {
 			x: NumberUtils.parseIntOrThrow(params[2], "Point to.x must be an integer"),
 			y: NumberUtils.parseIntOrThrow(params[3], "Point to.y must be an integer")
 		};
-		const fillColor = params[4];
+		const fillColor = params[4] || " ";
 
 		const command: DrawRectangleCommandDescriptor = { command: "DRAW_RECTANGLE", from, to, fillColor };
 
