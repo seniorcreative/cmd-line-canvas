@@ -25,20 +25,20 @@ export class CommandLineCanvas extends Canvas {
 
 	generate(commandStore: CommandStore): void {
 		// Create empty matrix
-		this._matrix = this.createEmptyMatrix();
+		this.matrix = this.createEmptyMatrix();
 		// Apply Lines
 		commandStore.lineCommands.forEach((lineCommand: DrawLineCommandDescriptor) => {
-			this._matrix = this.drawLine(lineCommand.from, lineCommand.to);
+			this.matrix = this.drawLine(lineCommand.from, lineCommand.to);
 		});
 		// Apply Rectangles
 		commandStore.rectangleCommands.forEach((rectangleCommand: DrawRectangleCommandDescriptor) => {
-			this._matrix = this.drawRectangle(rectangleCommand.from, rectangleCommand.to, rectangleCommand.fillColor);
+			this.matrix = this.drawRectangle(rectangleCommand.from, rectangleCommand.to, rectangleCommand.fillColor);
 		});
 	}
 
 	render(): void {
 		// Print the canvas in the terminal
-		CommandUtils.dumpOutput(this._matrix);
+		CommandUtils.dumpOutput(this.matrix);
 	}
 
 }

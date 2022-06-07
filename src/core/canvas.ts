@@ -71,20 +71,7 @@ export abstract class Canvas {
 
 	fillArea(point: Point, color: string, rectangleCommands: DrawRectangleCommandDescriptor[]): void {
 		if (!this.isWithin(point)) throw new Error("Point of brush mark is out of the canvas");
-		//     // Brush coords need to be:
-		//     // - within canvas bounds
-		//     // - not on a line (or anything that is an 'x' char)
-		//     // - inside a rect || outside a rect
-
-		//     // Brush logic functions need to:
 		this.fillObjectAtBrushPoint(point, color, rectangleCommands);
-		// this.backgroundColor = color;
-		//     // - paint canvas layer first 
-		//     // - set a background color on canvas if brushed outside of a box
-		//     // - fill canvas with background color 
-		//     // - draw lines on top of the canvas
-		//     // - draw rects on top of the canvas
-		//     // - fill rects with fill color
 	}
 
 	public fillObjectAtBrushPoint(point: Point, color: string, rectangleCommands: DrawRectangleCommandDescriptor[]) {
@@ -106,7 +93,6 @@ export abstract class Canvas {
 				rectangleCommand.fillColor = color;
 			});
 		} else {
-			// Fill the canvas background instead
 			this._backgroundColor = color;
 		}
 
