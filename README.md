@@ -40,7 +40,6 @@ The app is therefore divided up into separate maintainable testable modules and 
 
 `app > handles input > parser input commmand > factory creates command for > app executes the command > checks if command is valid according to canvas principles and stores the command > app then generates the canvas picture from the stored commands > app renders the picture in the terminal`
 
-
 ## Ideas for expansion
 
 * Add clear canvas command
