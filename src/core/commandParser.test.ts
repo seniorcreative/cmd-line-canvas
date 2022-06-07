@@ -18,11 +18,6 @@ describe("Check parsing of commands", () => {
 		expect(commandParser.parse(input)).toStrictEqual({ command: "DRAW_LINE", from: { x: 1, y: 1 }, to: { x: 4, y: 1 } });
 	});
 
-	it("Should throw an invalid line command", () => {
-		const input = "L 10 20 30 40";
-		expect(() => { commandParser.parse(input); }).toThrow("The 'from' point or 'to' point for Line is not valid");
-	});
-
 	it("Should parse a valid rectangle command", () => {
 		const input = "R 3 3 7 7";
 		expect(commandParser.parse(input)).toStrictEqual({ command: "DRAW_RECTANGLE", from: { x: 3, y: 3 }, to: { x: 7, y: 7 }, fillColor: undefined });
