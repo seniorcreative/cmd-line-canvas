@@ -55,9 +55,7 @@ export class CommandParser {
 			x: NumberUtils.parseIntOrThrow(params[2], "Point to.x must be an integer"),
 			y: NumberUtils.parseIntOrThrow(params[3], "Point to.y must be an integer")
 		};
-		const fillColor = params[4] || " ";
-
-		const command: DrawRectangleCommandDescriptor = { command: "DRAW_RECTANGLE", from, to, fillColor };
+		const command: DrawRectangleCommandDescriptor = { command: "DRAW_RECTANGLE", from, to };
 
 		return command;
 	}

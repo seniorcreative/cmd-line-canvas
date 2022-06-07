@@ -62,7 +62,7 @@ export abstract class Canvas {
 					if (col === from.x || col === to.x) {
 						rowLine[col] = this._borderColor;
 					} else {
-						rowLine[col] = fillColor || this.backgroundColor;
+						rowLine[col] = fillColor || " ";
 					}
 				}
 			}

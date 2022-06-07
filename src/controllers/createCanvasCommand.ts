@@ -12,6 +12,7 @@ export class CreateCanvasCommand implements Command {
 
 	execute(): CanvasProvider {
 		const canvas: CommandLineCanvas = new CommandLineCanvas(this.width, this.height);
+		canvas.createEmptyMatrix();
 		this.canvasProvider.register(canvas);
 		return this.canvasProvider;
 	}

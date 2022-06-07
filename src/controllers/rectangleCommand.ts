@@ -10,7 +10,8 @@ export class RectangleCommand implements Command {
 		public readonly to: Point,
 		public fillColor: string | undefined,
 		private readonly canvasProvider: CanvasProvider,
-	) { }
+	) { 
+	}
 
 	execute(): void {
 		const canvas: CommandLineCanvas = this.canvasProvider.canvas;
