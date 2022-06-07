@@ -21,9 +21,9 @@ export class App {
 			const command = this.commandFactory.create(commandDescriptor, this.commandStore);
 			command.execute();
 
-			const canvas: CommandLineCanvas = this.canvasProvider.canvas; // Throws an error if Canvas has not been registered by the CreateCanvasCommand before.
-			canvas.generate(this.commandStore); // Prints the canvas in the terminal.
-			canvas.render(); // Prints the canvas in the terminal.
+			const canvas: CommandLineCanvas | null = this.canvasProvider.canvas;
+			canvas && canvas.generate(this.commandStore); 
+			canvas && canvas.render(); 
 		} catch (e) {
 			if (e instanceof OperationalError) {
 				return console.warn(`Sorry, cannot process a command. ${e.description}.\nPlease, verify the input and try again.`);

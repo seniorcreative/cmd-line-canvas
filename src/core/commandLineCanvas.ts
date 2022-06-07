@@ -38,7 +38,7 @@ export class CommandLineCanvas extends Canvas {
 
 	render(): void {
 		// Print the canvas in the terminal
-		CommandUtils.dumpOutput(this.matrix);
+		CommandUtils.drawCanvas(this.matrix);
 	}
 
 }

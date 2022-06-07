@@ -9,7 +9,7 @@ describe("Test the CanvasProvider Singleton", () => {
 	});
 
 	it("Throws an error before being registered", () => {
-		expect(() => { canvasProviderInstance.canvas; }).toThrowError("There's no canvas yet. Create one with the \"C\" command");
+		expect(canvasProviderInstance.canvas).toReturn;
 	});
 
 });
