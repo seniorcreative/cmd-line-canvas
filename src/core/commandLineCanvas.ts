@@ -26,13 +26,11 @@ export class CommandLineCanvas extends Canvas {
 		// Create empty matrix (with background color if set)
 		this.matrix = this.createEmptyMatrix();
 		// Apply Lines
-		console.log("lineCommands", commandStore.lineCommands);
 		commandStore.lineCommands.forEach((lineCommand: string) => {
 			const parsedLineCommand = JSON.parse(lineCommand);
 			this.drawLine(parsedLineCommand.from, parsedLineCommand.to);
 		});
 		// Apply Rectangles (with fill colors if set)
-		console.log("rectCommands", commandStore.rectangleCommands);
 		commandStore.rectangleCommands.forEach((rectangleCommand: string) => {
 			const parsedRectangleCommand = JSON.parse(rectangleCommand);
 			this.matrix = this.drawRectangle(parsedRectangleCommand.from, parsedRectangleCommand.to, parsedRectangleCommand.fillColor);
