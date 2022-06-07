@@ -5,6 +5,8 @@ export class OperationalError extends Error {
 	constructor(description: string) {
 		super(description);
 
+		this.description = description;
+
 		Object.setPrototypeOf(this, new.target.prototype);
 
 		Error.captureStackTrace(this);

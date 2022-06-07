@@ -85,7 +85,7 @@ export abstract class Canvas {
 		const charAtBrushPoint: string = this._matrix[point.y][point.x];
 
 		if (charAtBrushPoint === this._borderColor) {
-			throw new OperationalError("You can't brush on a line or border.");
+			throw new OperationalError("You can't brush on a line or border");
 		}
 
 		const matchRectangles = rectangleCommands.filter((rectangleCommand: DrawRectangleCommandDescriptor) => {

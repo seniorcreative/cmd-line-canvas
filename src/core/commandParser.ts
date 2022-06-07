@@ -12,12 +12,12 @@ export class CommandParser {
 			.filter(Boolean);
 
 		switch (command) {
-		case "C": return this.parseCreateCanvasCommand(params);
-		case "L": return this.parseDrawLineCommand(params);
-		case "R": return this.parseDrawRectangleCommand(params);
-		case "B": return this.parseFillAreaCommand(params);
-		case "Q": return this.parseQuitCommand();
-		default: throw new OperationalError("Unexpected command.");
+			case "C": return this.parseCreateCanvasCommand(params);
+			case "L": return this.parseDrawLineCommand(params);
+			case "R": return this.parseDrawRectangleCommand(params);
+			case "B": return this.parseFillAreaCommand(params);
+			case "Q": return this.parseQuitCommand();
+			default: throw new OperationalError("Unexpected command.");
 		}
 
 	}
@@ -33,12 +33,12 @@ export class CommandParser {
 
 	parseDrawLineCommand(params: string[]): CommandDescriptor {
 		const from: Point = {
-			x: NumberUtils.parseIntOrThrow(params[0], "x1 must be an integer"),
-			y: NumberUtils.parseIntOrThrow(params[1], "y1 must be an integer")
+			x: NumberUtils.parseIntOrThrow(params[0], "Point from.x must be an integer"),
+			y: NumberUtils.parseIntOrThrow(params[1], "Point from.y must be an integer")
 		};
 		const to: Point = {
-			x: NumberUtils.parseIntOrThrow(params[2], "x2 must be an integer"),
-			y: NumberUtils.parseIntOrThrow(params[3], "y2 must be an integer")
+			x: NumberUtils.parseIntOrThrow(params[2], "Point to.x must be an integer"),
+			y: NumberUtils.parseIntOrThrow(params[3], "Point to.y must be an integer")
 		};
 
 		const command: DrawLineCommandDescriptor = { command: "DRAW_LINE", from, to };
@@ -48,12 +48,12 @@ export class CommandParser {
 
 	parseDrawRectangleCommand(params: string[]): CommandDescriptor {
 		const from: Point = {
-			x: NumberUtils.parseIntOrThrow(params[0], "x1 must be an integer"),
-			y: NumberUtils.parseIntOrThrow(params[1], "y1 must be an integer")
+			x: NumberUtils.parseIntOrThrow(params[0], "Point from.x must be an integer"),
+			y: NumberUtils.parseIntOrThrow(params[1], "Point from.y must be an integer")
 		};
 		const to: Point = {
-			x: NumberUtils.parseIntOrThrow(params[2], "x2 must be an integer"),
-			y: NumberUtils.parseIntOrThrow(params[3], "y2 must be an integer")
+			x: NumberUtils.parseIntOrThrow(params[2], "Point to.x must be an integer"),
+			y: NumberUtils.parseIntOrThrow(params[3], "Point to.y must be an integer")
 		};
 		const fillColor = params[4];
 
@@ -65,8 +65,8 @@ export class CommandParser {
 	parseFillAreaCommand(params: string[]): CommandDescriptor {
 
 		const point = {
-			x: NumberUtils.parseIntOrThrow(params[0], "x must be an integer"),
-			y: NumberUtils.parseIntOrThrow(params[1], "y must be an integer")
+			x: NumberUtils.parseIntOrThrow(params[0], "Point.x must be an integer"),
+			y: NumberUtils.parseIntOrThrow(params[1], "Point.y must be an integer")
 		};
 		const color = params[2];
 

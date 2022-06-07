@@ -7,6 +7,7 @@ import { RectangleCommand } from "../controllers/rectangleCommand";
 import { FillAreaCommand } from "../controllers/fillAreaCommand";
 import { QuitCommand } from "../controllers/quitCommand";
 import { CommandStore } from "../model/commandStore";
+import { OperationalError } from "./operationalError";
 
 export class CommandFactory {
 
