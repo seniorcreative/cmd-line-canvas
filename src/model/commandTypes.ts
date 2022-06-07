@@ -9,5 +9,5 @@ export type CommandDescriptor = {
     point?: Point,
     from?: Point,
     to?: Point,
-    backgroundColor?: string
+    fillColor?: string
 }

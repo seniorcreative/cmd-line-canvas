@@ -15,7 +15,8 @@ export interface DrawLineCommandDescriptor {
 export interface DrawRectangleCommandDescriptor {
     readonly command: "DRAW_RECTANGLE",
     readonly to: Point,
-    readonly from: Point
+    readonly from: Point,
+    fillColor?: string
 }
 
 export interface FillAreaCommandDescriptor {

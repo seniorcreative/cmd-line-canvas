@@ -1,10 +1,11 @@
-import { CommandUtils } from "../common/commandUtils";
+import { DrawRectangleCommandDescriptor } from "../model";
 import { Point } from "../model/drawingTypes";
 
 export abstract class Canvas {
 
 	private _backgroundColor = " ";
 	public _matrix: string[][] = [[]];
+	private _borderColor = "x";
 
 	constructor(
 		public readonly width: number,
@@ -20,15 +21,16 @@ export abstract class Canvas {
 	drawLine(from: Point, to: Point): string[][] {
 		if (!this.isWithin(from)) throw new Error("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new Error("Point \"to\" is out of the canvas");
+
 		if (from.y === to.y) {  // Horizontal line
 			const rowLine = this._matrix[from.y];
 			for (let col = from.x; col <= to.x; col++) {
-				rowLine[col] = "x";
+				rowLine[col] = this._borderColor;
 			}
 			return this._matrix;
 		} else if (from.x === to.x) { // Vertical line
 			for (let row = from.y; row <= to.y; row++) {
-				this._matrix[row][from.x] = "x";
+				this._matrix[row][from.x] = this._borderColor;
 			}
 			return this._matrix;
 		} else {
@@ -36,13 +38,13 @@ export abstract class Canvas {
 		}
 	}
 
-	drawRectangle(from: Point, to: Point): string[][] {
+	drawRectangle(from: Point, to: Point, fillColor?: string): string[][] {
 		if (!this.isWithin(from)) throw new Error("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new Error("Point \"to\" is out of the canvas");
-		// Top row
+
 		const rowLineTop = this._matrix[from.y];
 		for (let col = from.x; col <= to.x; col++) {
-			rowLineTop[col] = "x";
+			rowLineTop[col] = this._borderColor;
 		}
 
 		// Mid rows (with fill if brushed inside)
@@ -51,9 +53,9 @@ export abstract class Canvas {
 				const rowLine = this._matrix[row];
 				for (let col = from.x; col <= to.x; col++) {
 					if (col === from.x || col === to.x) {
-						rowLine[col] = "x";
+						rowLine[col] = this._borderColor;
 					} else {
-						rowLine[col] = " ";
+						rowLine[col] = fillColor || this.backgroundColor;
 					}
 				}
 			}
@@ -62,12 +64,12 @@ export abstract class Canvas {
 		// Bottom row
 		const rowLineBottom = this._matrix[to.y];
 		for (let col = from.x; col <= to.x; col++) {
-			rowLineBottom[col] = "x";
+			rowLineBottom[col] = this._borderColor;
 		}
 		return this._matrix;
 	}
 
-	fillArea(point: Point, color: string): void {
+	fillArea(point: Point, color: string, rectangleCommands: DrawRectangleCommandDescriptor[]): void {
 		if (!this.isWithin(point)) throw new Error("Point of brush mark is out of the canvas");
 		//     // Brush coords need to be:
 		//     // - within canvas bounds
@@ -75,19 +77,39 @@ export abstract class Canvas {
 		//     // - inside a rect || outside a rect
 
 		//     // Brush logic functions need to:
+		this.fillObjectAtBrushPoint(point, color, rectangleCommands);
+		// this.backgroundColor = color;
 		//     // - paint canvas layer first 
 		//     // - set a background color on canvas if brushed outside of a box
 		//     // - fill canvas with background color 
 		//     // - draw lines on top of the canvas
 		//     // - draw rects on top of the canvas
 		//     // - fill rects with fill color
-
-		return;
 	}
 
-	render(): void {
-		// Print the canvas in the terminal
-		CommandUtils.dumpOutput(this._matrix);
+	public fillObjectAtBrushPoint(point: Point, color: string, rectangleCommands: DrawRectangleCommandDescriptor[]) {
+		const charAtBrushPoint: string = this._matrix[point.y][point.x];
+
+		if (charAtBrushPoint === this._borderColor) {
+			throw new Error("You can't brush on a line or border.");
+		}
+
+		const matchRectangles = rectangleCommands.filter((rectangleCommand: DrawRectangleCommandDescriptor) => {
+			return rectangleCommand.from.x < point.x &&
+				rectangleCommand.to.x > point.x &&
+				rectangleCommand.from.y < point.y &&
+				rectangleCommand.to.y > point.y;
+		});
+
+		if (matchRectangles.length) {
+			matchRectangles.forEach((rectangleCommand: DrawRectangleCommandDescriptor) => {
+				rectangleCommand.fillColor = color;
+			});
+		} else {
+			// Fill the canvas background instead
+			this._backgroundColor = color;
+		}
+
 	}
 
 	public get backgroundColor(): string {

@@ -1,13 +1,15 @@
+import { CommandUtils } from "../common/commandUtils";
+import { DrawLineCommandDescriptor, DrawRectangleCommandDescriptor } from "../model";
+import { CommandStore } from "../model/commandStore";
 import { Canvas } from "./canvas";
 
 export class CommandLineCanvas extends Canvas {
 
-	constructor(width: number, height: number,) {
+	constructor(width: number, height: number) {
 		super(width, height);
-		this._matrix = this.createEmptyMatrix();
 	}
 
-	private createEmptyMatrix(): string[][] {
+	createEmptyMatrix(): string[][] {
 		const fullRow = new Array(this.width + 2).fill("-");
 		const borderRow = [];
 		const midRows = [];
@@ -21,5 +23,22 @@ export class CommandLineCanvas extends Canvas {
 		return [fullRow].concat(midRows).concat([fullRow]);
 	}
 
+	generate(commandStore: CommandStore): void {
+		// Create empty matrix
+		this._matrix = this.createEmptyMatrix();
+		// Apply Lines
+		commandStore.lineCommands.forEach((lineCommand: DrawLineCommandDescriptor) => {
+			this._matrix = this.drawLine(lineCommand.from, lineCommand.to);
+		});
+		// Apply Rectangles
+		commandStore.rectangleCommands.forEach((rectangleCommand: DrawRectangleCommandDescriptor) => {
+			this._matrix = this.drawRectangle(rectangleCommand.from, rectangleCommand.to, rectangleCommand.fillColor);
+		});
+	}
+
+	render(): void {
+		// Print the canvas in the terminal
+		CommandUtils.dumpOutput(this._matrix);
+	}
 
 }

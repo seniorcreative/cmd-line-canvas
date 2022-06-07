@@ -1,8 +1,8 @@
-import { Canvas } from "./canvas";
+import { CommandLineCanvas } from "./commandLineCanvas";
 
 export class CanvasProvider {
 
-	private _canvas: Canvas | null = null;
+	private _canvas: CommandLineCanvas | null = null;
 	private static instance: CanvasProvider;
 
 	public static getInstance(): CanvasProvider {
@@ -12,11 +12,11 @@ export class CanvasProvider {
 		return CanvasProvider.instance;
 	}
 
-	public register(canvas: Canvas): void {
+	public register(canvas: CommandLineCanvas): void {
 		this._canvas = canvas;
 	}
 
-	public get canvas(): Canvas {
+	public get canvas(): CommandLineCanvas {
 		if (!this._canvas) throw new Error("There's no canvas yet. Create one with the 'C' command.");
 		return this._canvas;
 	}

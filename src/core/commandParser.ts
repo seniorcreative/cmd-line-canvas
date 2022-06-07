@@ -1,4 +1,4 @@
-import { CommandDescriptor } from "../model";
+import { CommandDescriptor, DrawLineCommandDescriptor, DrawRectangleCommandDescriptor } from "../model";
 import { NumberUtils } from "../common/numberUtils";
 import { Point } from "../model/drawingTypes";
 
@@ -11,12 +11,12 @@ export class CommandParser {
 			.filter(Boolean);
 
 		switch (command) {
-		case "C": return this.parseCreateCanvasCommand(params);
-		case "L": return this.parseDrawLineCommand(params);
-		case "R": return this.parseDrawRectangleCommand(params);
-		case "B": return this.parseFillAreaCommand(params);
-		case "Q": return this.parseQuitCommand();
-		default: throw new Error("Unexpected command.");
+			case "C": return this.parseCreateCanvasCommand(params);
+			case "L": return this.parseDrawLineCommand(params);
+			case "R": return this.parseDrawRectangleCommand(params);
+			case "B": return this.parseFillAreaCommand(params);
+			case "Q": return this.parseQuitCommand();
+			default: throw new Error("Unexpected command.");
 		}
 
 	}
@@ -45,7 +45,9 @@ export class CommandParser {
 
 		if (!hasEitherMatches) throw new Error("The 'from' point or 'to' point for Line is not valid");
 
-		return { command: "DRAW_LINE", from, to };
+		const command: DrawLineCommandDescriptor = { command: "DRAW_LINE", from, to };
+
+		return command;
 	}
 
 	parseDrawRectangleCommand(params: string[]): CommandDescriptor {
@@ -57,8 +59,11 @@ export class CommandParser {
 			x: NumberUtils.parseIntOrThrow(params[2], "x2 must be an integer"),
 			y: NumberUtils.parseIntOrThrow(params[3], "y2 must be an integer")
 		};
+		const fillColor = params[2];
 
-		return { command: "DRAW_RECTANGLE", from, to };
+		const command: DrawRectangleCommandDescriptor = { command: "DRAW_RECTANGLE", from, to, fillColor };
+
+		return command;
 	}
 
 	parseFillAreaCommand(params: string[]): CommandDescriptor {

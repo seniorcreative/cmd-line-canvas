@@ -42,7 +42,7 @@ describe("Check canvas abstract methods", () => {
 			["-", "-", "-", "-", "-", "-", "-"]]);
 	});
 
-	it("Should create a reactangle in the correct place", () => {
+	it("Should create a rectangle in the correct place", () => {
 		expect(canvas.drawRectangle({ x: 1, y: 1 }, { x: 4, y: 4 })).toEqual([
 			["-", "-", "-", "-", "-", "-", "-"],
 			["|", "x", "x", "x", "x", " ", "|"],

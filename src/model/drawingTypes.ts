@@ -8,13 +8,13 @@ export type Line = {
     to: Point
 }
 
-export type Rect = {
+export type Rectangle = {
     from: Point,
     to: Point
-    backgroundColor?: string
+    fillColor?: string
 }
 
 export type FillArea = {
     point: Point,
-    backgroundColor: string
+    color: string
 }
