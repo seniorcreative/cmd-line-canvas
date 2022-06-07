@@ -1,4 +1,3 @@
-import { DrawLineCommandDescriptor, DrawRectangleCommandDescriptor } from "../model";
 import { Point } from "../model/drawingTypes";
 import { OperationalError } from "./operationalError";
 
@@ -24,17 +23,15 @@ export abstract class Canvas {
 		return xWithin && yWithin;
 	}
 
-	validateDrawLine(from: Point, to: Point, lineCommands: Set<DrawLineCommandDescriptor>) : boolean {
+	validateDrawLine(from: Point, to: Point, lineCommands: Set<string>) : boolean {
 		if (!this.isWithin(from)) throw new OperationalError("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new OperationalError("Point \"to\" is out of the canvas");
 		if (from.x != to.x && from.y != to.y) throw new OperationalError("The \"from\" point or \"to\" point for \"L\" command is not valid");
-		lineCommands.add({command: "DRAW_LINE", from, to});
+		lineCommands.add(JSON.stringify({command: "DRAW_LINE", from, to}));
 		return true;
 	}
 
-	drawLine(from: Point, to: Point): string[][] {
-		console.log("drawline called");
-		
+	drawLine(from: Point, to: Point): string[][] {		
 		if (from.y === to.y) {  // Horizontal line
 			const rowLine = this.matrix[from.y];
 			for (let col = from.x; col <= to.x; col++) {
@@ -49,16 +46,16 @@ export abstract class Canvas {
 		return this.matrix;
 	}
 
-	validateDrawRectangle(from: Point, to: Point, fillColor: string, rectangleCommands: Set<DrawRectangleCommandDescriptor>): boolean {
+	validateDrawRectangle(from: Point, to: Point, fillColor: string | undefined, rectangleCommands: Set<string>): boolean {
 		if (!this.isWithin(from)) throw new OperationalError("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new OperationalError("Point \"to\" is out of the canvas");
-
-		rectangleCommands.add({command: "DRAW_RECTANGLE", from, to, fillColor});
+		if (!fillColor) fillColor = " ";
+		rectangleCommands.add(JSON.stringify({command: "DRAW_RECTANGLE", from, to, fillColor}));
 
 		return true;
 	}
 
-	drawRectangle(from: Point, to: Point, fillColor: string): string[][] {
+	drawRectangle(from: Point, to: Point, fillColor: string | undefined): string[][] {
 		
 		const rowLineTop = this.matrix[from.y];
 		for (let col = from.x; col <= to.x; col++) {
@@ -88,30 +85,35 @@ export abstract class Canvas {
 		return this.matrix;
 	}
 
-	fillArea(point: Point, color: string, rectangleCommands: Set<DrawRectangleCommandDescriptor>): void {
+	fillArea(point: Point, color: string, rectangleCommands: Set<string>): void {
 		if (!this.isWithin(point)) throw new OperationalError("Point of brush mark is out of the canvas");
 		if (color && color.length > 1) throw new OperationalError("Please use a color that is ony one character in length");
 		this.fillObjectAtBrushPoint(point, color, rectangleCommands);
 	}
 
-	public fillObjectAtBrushPoint(point: Point, color: string, rectangleCommands: Set<DrawRectangleCommandDescriptor>) : void {
+	public fillObjectAtBrushPoint(point: Point, color: string, rectangleCommands: Set<string>) : void {
 		const charAtBrushPoint: string = this.matrix[point.y][point.x];
 
 		if (new Set([this._borderColor, "-" , "|"]).has(charAtBrushPoint)) {
 			throw new OperationalError("You can't brush on a line or border");
 		}
 
-		const matchRectangles = [...rectangleCommands].filter((rectangleCommand: DrawRectangleCommandDescriptor) => {
-			return rectangleCommand.from.x < point.x &&
-				rectangleCommand.to.x > point.x &&
-				rectangleCommand.from.y < point.y &&
-				rectangleCommand.to.y > point.y;
+		const matchRectangles = [...rectangleCommands].filter((rectangleCommand: string) => {
+			const parsedRectangleCommand = JSON.parse(rectangleCommand);
+			return parsedRectangleCommand.from.x < point.x &&
+				parsedRectangleCommand.to.x > point.x &&
+				parsedRectangleCommand.from.y < point.y &&
+				parsedRectangleCommand.to.y > point.y;
 		});
 
 		if (matchRectangles.length) {
-			matchRectangles.forEach((rectangleCommand: DrawRectangleCommandDescriptor) => {
-				rectangleCommand.fillColor = color;
-			});
+			for (const rect in matchRectangles) {
+				rectangleCommands.delete(matchRectangles[rect]);
+				const parsedRectangleCommand = JSON.parse(matchRectangles[rect]);
+				parsedRectangleCommand.fillColor = color;
+				matchRectangles[rect] = JSON.stringify(parsedRectangleCommand);
+				rectangleCommands.add(matchRectangles[rect]);
+			}
 		} else {
 			this._backgroundColor = color;
 		}

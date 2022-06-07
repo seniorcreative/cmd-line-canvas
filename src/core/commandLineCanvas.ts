@@ -1,5 +1,4 @@
 import { CommandUtils } from "../common/commandUtils";
-import { DrawLineCommandDescriptor, DrawRectangleCommandDescriptor } from "../model";
 import { CommandStore } from "../model/commandStore";
 import { Canvas } from "./canvas";
 
@@ -27,12 +26,16 @@ export class CommandLineCanvas extends Canvas {
 		// Create empty matrix (with background color if set)
 		this.matrix = this.createEmptyMatrix();
 		// Apply Lines
-		commandStore.lineCommands.forEach((lineCommand: DrawLineCommandDescriptor) => {
-			this.drawLine(lineCommand.from, lineCommand.to);
+		console.log("lineCommands", commandStore.lineCommands);
+		commandStore.lineCommands.forEach((lineCommand: string) => {
+			const parsedLineCommand = JSON.parse(lineCommand);
+			this.drawLine(parsedLineCommand.from, parsedLineCommand.to);
 		});
 		// Apply Rectangles (with fill colors if set)
-		commandStore.rectangleCommands.forEach((rectangleCommand: DrawRectangleCommandDescriptor) => {
-			this.matrix = this.drawRectangle(rectangleCommand.from, rectangleCommand.to, String(rectangleCommand.fillColor));
+		console.log("rectCommands", commandStore.rectangleCommands);
+		commandStore.rectangleCommands.forEach((rectangleCommand: string) => {
+			const parsedRectangleCommand = JSON.parse(rectangleCommand);
+			this.matrix = this.drawRectangle(parsedRectangleCommand.from, parsedRectangleCommand.to, parsedRectangleCommand.fillColor);
 		});
 	}
 
