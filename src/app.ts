@@ -26,7 +26,7 @@ export class App {
 			canvas && canvas.render(); 
 		} catch (e) {
 			if (e instanceof OperationalError) {
-				return console.warn(`Sorry, cannot process a command. ${e.description}.\nPlease, verify the input and try again.`);
+				return console.warn(`Sorry, cannot process that command. ${e.description}.\nPlease try again.`);
 			} else {
 				console.error("Unexpected error happened. Exiting...");
 				process.exit(1);

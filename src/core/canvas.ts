@@ -27,7 +27,7 @@ export abstract class Canvas {
 	drawLine(from: Point, to: Point): string[][] {
 		if (!this.isWithin(from)) throw new OperationalError("Point \"from\" is out of the canvas");
 		if (!this.isWithin(to)) throw new OperationalError("Point \"to\" is out of the canvas");
-		if (from.x != to.x && from.y != to.y) throw new OperationalError("The \"from\" point or \"to\" point for Line is not valid");
+		if (from.x != to.x && from.y != to.y) throw new OperationalError("The \"from\" point or \"to\" point for \"L\" command is not valid");
 
 		if (from.y === to.y) {  // Horizontal line
 			const rowLine = this._matrix[from.y];
