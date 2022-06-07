@@ -25,7 +25,7 @@ describe("Check parsing of commands", () => {
 
 	it("Should parse a valid rectangle command", () => {
 		const input = "R 3 3 7 7";
-		expect(commandParser.parse(input)).toStrictEqual({ command: "DRAW_RECTANGLE", from: { x: 3, y: 3 }, to: { x: 7, y: 7 } });
+		expect(commandParser.parse(input)).toStrictEqual({ command: "DRAW_RECTANGLE", from: { x: 3, y: 3 }, to: { x: 7, y: 7 }, fillColor: undefined });
 	});
 
 	it("Should parse a valid fill area command", () => {
