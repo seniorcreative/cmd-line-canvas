@@ -1,5 +1,6 @@
 import { DrawRectangleCommandDescriptor } from "../model";
 import { Point } from "../model/drawingTypes";
+import { OperationalError } from "./operationalError";
 
 export abstract class Canvas {
 
@@ -10,7 +11,12 @@ export abstract class Canvas {
 	constructor(
 		public readonly width: number,
 		public readonly height: number
-	) { }
+	) {
+		if (width < 3) throw new OperationalError("width should be equal to or greater than 3.");
+		if (!Number.isInteger(width)) throw new OperationalError("width should be an integer.");
+		if (height < 3) throw new OperationalError("height should be equal to or greater than 3.");
+		if (!Number.isInteger(height)) throw new OperationalError("height should be an integer.");
+	}
 
 	isWithin(point: Point): boolean {
 		const xWithin = (point.x > 0) && (point.x <= this.width);
@@ -19,8 +25,9 @@ export abstract class Canvas {
 	}
 
 	drawLine(from: Point, to: Point): string[][] {
-		if (!this.isWithin(from)) throw new Error("Point \"from\" is out of the canvas");
-		if (!this.isWithin(to)) throw new Error("Point \"to\" is out of the canvas");
+		if (!this.isWithin(from)) throw new OperationalError("Point \"from\" is out of the canvas");
+		if (!this.isWithin(to)) throw new OperationalError("Point \"to\" is out of the canvas");
+		if (from.x != to.x && from.y != to.y) throw new OperationalError("The 'from' point or 'to' point for Line is not valid");
 
 		if (from.y === to.y) {  // Horizontal line
 			const rowLine = this._matrix[from.y];
@@ -34,13 +41,13 @@ export abstract class Canvas {
 			}
 			return this._matrix;
 		} else {
-			throw new Error("Line co-ords do not correspond with vertical or horizontal");
+			throw new OperationalError("Line co-ords do not correspond with vertical or horizontal");
 		}
 	}
 
 	drawRectangle(from: Point, to: Point, fillColor?: string): string[][] {
-		if (!this.isWithin(from)) throw new Error("Point \"from\" is out of the canvas");
-		if (!this.isWithin(to)) throw new Error("Point \"to\" is out of the canvas");
+		if (!this.isWithin(from)) throw new OperationalError("Point \"from\" is out of the canvas");
+		if (!this.isWithin(to)) throw new OperationalError("Point \"to\" is out of the canvas");
 
 		const rowLineTop = this._matrix[from.y];
 		for (let col = from.x; col <= to.x; col++) {
@@ -70,7 +77,7 @@ export abstract class Canvas {
 	}
 
 	fillArea(point: Point, color: string, rectangleCommands: DrawRectangleCommandDescriptor[]): void {
-		if (!this.isWithin(point)) throw new Error("Point of brush mark is out of the canvas");
+		if (!this.isWithin(point)) throw new OperationalError("Point of brush mark is out of the canvas");
 		this.fillObjectAtBrushPoint(point, color, rectangleCommands);
 	}
 
@@ -78,7 +85,7 @@ export abstract class Canvas {
 		const charAtBrushPoint: string = this._matrix[point.y][point.x];
 
 		if (charAtBrushPoint === this._borderColor) {
-			throw new Error("You can't brush on a line or border.");
+			throw new OperationalError("You can't brush on a line or border.");
 		}
 
 		const matchRectangles = rectangleCommands.filter((rectangleCommand: DrawRectangleCommandDescriptor) => {

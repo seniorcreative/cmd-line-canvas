@@ -1,6 +1,7 @@
 import { CommandDescriptor, DrawLineCommandDescriptor, DrawRectangleCommandDescriptor } from "../model";
 import { NumberUtils } from "../common/numberUtils";
 import { Point } from "../model/drawingTypes";
+import { OperationalError } from "./operationalError";
 
 export class CommandParser {
 
@@ -16,7 +17,7 @@ export class CommandParser {
 		case "R": return this.parseDrawRectangleCommand(params);
 		case "B": return this.parseFillAreaCommand(params);
 		case "Q": return this.parseQuitCommand();
-		default: throw new Error("Unexpected command.");
+		default: throw new OperationalError("Unexpected command.");
 		}
 
 	}
@@ -25,7 +26,6 @@ export class CommandParser {
 
 		const width = NumberUtils.parseIntOrThrow(params[0], "Canvas width must be an integer");
 		const height = NumberUtils.parseIntOrThrow(params[1], "Canvas height must be an integer");
-		NumberUtils.cmdCanvasSizeCheckOrThrow(width, height, "Canvas size is too small");
 
 		return { command: "CREATE_CANVAS", width, height };
 
@@ -40,10 +40,6 @@ export class CommandParser {
 			x: NumberUtils.parseIntOrThrow(params[2], "x2 must be an integer"),
 			y: NumberUtils.parseIntOrThrow(params[3], "y2 must be an integer")
 		};
-
-		const hasEitherMatches = from.x === to.x || from.y === to.y;
-
-		if (!hasEitherMatches) throw new Error("The 'from' point or 'to' point for Line is not valid");
 
 		const command: DrawLineCommandDescriptor = { command: "DRAW_LINE", from, to };
 

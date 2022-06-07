@@ -31,7 +31,7 @@ export class CommandFactory {
 			command = new QuitCommand();
 			break;
 		default:
-			throw new Error("no command found");
+			throw new OperationalError("no command found");
 
 		}
 

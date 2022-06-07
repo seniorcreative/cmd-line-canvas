@@ -1,4 +1,5 @@
 import { CommandLineCanvas } from "./commandLineCanvas";
+import { OperationalError } from "./operationalError";
 
 export class CanvasProvider {
 
@@ -17,7 +18,7 @@ export class CanvasProvider {
 	}
 
 	public get canvas(): CommandLineCanvas {
-		if (!this._canvas) throw new Error("There's no canvas yet. Create one with the 'C' command.");
+		if (!this._canvas) throw new OperationalError("There's no canvas yet. Create one with the 'C' command.");
 		return this._canvas;
 	}
 }
