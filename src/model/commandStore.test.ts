@@ -22,8 +22,8 @@ describe("Command store method storing the commandDescriptor", () => {
 		commandStore.store(commandDescriptor);
 	});
 
-	it("should return an array with a line command", () => {
-		expect(commandStore.lineCommands).toContain(commandDescriptor);
+	it("should return a set with a line command", () => {
+		expect(commandStore.lineCommands).toContain(JSON.stringify(commandDescriptor));
 	});
 	
 });
