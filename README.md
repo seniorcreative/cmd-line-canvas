@@ -38,15 +38,7 @@ Wherever possible I have tried to maintain single responsibility, correct archit
 
 The app is therefore divided up into separate maintainable testable modules and follows this sequence:
 
-`app > handles input > parser input commmand > factory creates command for > app executes the command > checks if command is valid according to canvas principles and stores the command > app then generates the canvas picture from the stored commands > app renders the picture in the terminal`
-
-## Ideas for expansion
-
-* Add clear canvas command
-* Ability to delete lines, rectangles
-* Ability to transform the canvas - scale, flip, rotate etc
-* Add actual colors
-* Ability to save / export a drawing
+`app > handles input > parser input commmand > factory creates command passing canvas instance singleton > app executes the command > command creates canvas or throws if not yet available > drawing commands check if command is valid according to canvas principles and stores the command > app then generates the canvas picture from the stored commands > app renders the picture in the terminal`
 
 ## Assumptions
 
@@ -60,3 +52,11 @@ The app is therefore divided up into separate maintainable testable modules and 
 * Fill color can only have one alphanumeric character
 * Everything can overlap
 * A line or rectangle drawn again with the same co-ordinates will replace the previous
+
+## Finally, some ideas for expansion
+
+* Add clear canvas command
+* Ability to delete lines, rectangles
+* Ability to transform the canvas - scale, flip, rotate etc
+* Add actual colors
+* Ability to save / export a drawing
