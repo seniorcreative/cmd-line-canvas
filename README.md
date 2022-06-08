@@ -1,4 +1,4 @@
-## Project Name
+## Command Line Canvas
 Draw in the terminal with some basic commands
 
 
