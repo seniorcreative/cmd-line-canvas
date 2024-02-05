@@ -34,7 +34,7 @@ npm run lint
 
 ## Methodology
 
-Wherever possible I have tried to maintain single responsibility, correct architecture layers and loose coupling as per SOLID principles. This is a concept I do not profess to be an expert at yet and am still perfecting.
+Wherever possible I have maintained single responsibility, correct architecture layers and loose coupling as per SOLID principles.
 
 The app is therefore divided up into separate maintainable testable modules and follows this sequence:
 
