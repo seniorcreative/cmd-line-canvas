@@ -1,5 +1,5 @@
 ## Command Line Canvas
-Draw in the terminal with some basic commands
+Clean architected best practise typescript with help from Alexey K at EPAM. Draw in the terminal with some basic commands
 
 
 ## Prerequisites
